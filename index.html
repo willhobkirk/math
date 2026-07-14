@@ -10,6 +10,14 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
+
+    <script>
+        MathJax = {
+        tex: {
+            inlineMath: {'[+]': [['$', '$']]}
+        }
+        };
+    </script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <style>
         body {
@@ -46,10 +54,6 @@
               text-decoration: underline;
             }
         }
-        model-viewer {
-            width: 90vw;
-            height: 90vh;
-        }
     </style>
 
 
@@ -70,13 +74,40 @@
     My research focus is in <a href="https://en.wikipedia.org/wiki/Algebraic_topology">Algebraic</a> and <a href="https://en.wikipedia.org/wiki/Geometric_topology">Geometric Topology</a>.
     </p>
 
-    <p>Below is a model of a 3-Folded surface embedded in L(9,1). In the 3D model what you are seeing is the intersection of the 3-Folded surface with one of the two solid tori of a genus 1 Heegaard decomposition of L(9,1). The intersection of this 3-Folded surface with the other solid torus is a single meridional disk.
-    A p-Folded surface is an oriented folded surface in the sense of <a href="https://msp.org/agt/2007/7-1/p06.xhtml">Turaev</a> where the orientation of the interior induces a consistent orientation along each component of the singular locus and the index of every component of the singular locus is p. These objects realise <img src="./pics/eqn3.svg" alt="H_2(Z/pZ)" > classes (\(H_2(\mathbb{Z}_p)\)).
-    What makes this 3-Folded surface special is that it has the maximum euler characteristic of any 3-Folded surface embedded in L(9,1) which does not separate the ambient space.
+    <p>Lens spaces are a family of 3-manifolds obtained by identifying the boundaries of two solid tori. The Lens space $L(k,q)$ where $\gcd(k,q)= 1$ is given by identifying the solid tori such that the meridional curve of one solid torus is identified with a $(k,q)$-torus knot on the boundary of the other solid torus. 
     </p>
 
-    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/l9_1_website4.glb" ar-status="not-presenting">
+    <p>The following shows the identification that yields the $S^3 = L(1,0)$</p>
+
+    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/L_1_0.glb" ar-status="not-presenting" width=90vw height=90vh>
     </model-viewer>
+
+    <p>$S^1 \times S^2 = L(0,1)$</p>
+
+    <p>The real projective space $\mathbb{R}\text{P}^3 = L(2,1)$</p>
+
+    <p>The Lens space $L(7,2)$</p>
+
+    <p>The Lens spaces $L(2n,q)$ have a non-trivial $H_2(\mathbb{Z}_2)$ which is realised geometrically by a non-orientable surface $X$ embedded in $L(2n,1)$ which does not separate the embedding manifold (equivalently $X$ is connected). The maximum Euler characteristic of such a non-orientable surface embedded in $L(2n,1)$ is $2-n$ by a result of <a href="https://link.springer.com/article/10.1007/BF01389793">Bredon and Wood</a>. When $n=1$ this essentially says that $\mathbb{R}\text{P}^2 \subset \mathbb{R}\text{P}^3$. This embedding looks like:</p>
+
+    <p>The maximum euler characteristic connected non-orientable surface that embeds in $L(4,1)$ is the Klein bottle. It looks like this:</p>
+
+    <p>What is the correct object to realise the non-trivial $H_2(\mathbb{Z}_p)$ classes of the Lens spaces $L(pn,q)$? The answer: $p$-folded surfaces. A $p$-Folded surface is an oriented folded surface in the sense of <a href="https://msp.org/agt/2007/7-1/p06.xhtml">Turaev</a> where the orientation of the interior induces a consistent orientation along each component of the singular locus and the index of every component of the singular locus is p. The maximum Euler characteristic of a non-separating $3$-folded surface in the Lens space $L(3n,1)$ is $2-n$. The following is this $3$-folded surface $X\subset L(3,1)$ of Euler characteristic $1$.</p>
+
+    <p>This is the $3$-folded surface $X\subset L(6,1)$ of Euler characteristic $0$.</p>
+
+    <p>This is the $3$-folded surface $X\subset L(9,1)$ of Euler characteristic $-1$.</p>
+
+    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/l9_1_website4.glb" ar-status="not-presenting" width=90vw height=90vh>
+    </model-viewer>
+
+    <p>One part of the proof involved a generalisation the notion of a compression surgery to define the following surgeries of $3$-folded surfaces.</p>
+
+
+
+    <p>These $p$-folded surfaces are a new object but they contain a lot of information about the triangulations of $3$-manifolds due to the existence of canonical $p$-folded surfaces:</p>
+
+
 
 
 
