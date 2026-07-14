@@ -53,6 +53,17 @@
               background-color: transparent;
               text-decoration: underline;
             }
+            .small-figure {
+                width: 30vw;
+                height: 30vh;
+                margin: 0 auto;
+            }
+            .big-figure {
+                width: 90vw;
+                height: 90vh;
+                margin: 0 auto;
+            }
+            
         }
     </style>
 
@@ -77,10 +88,11 @@
     <p>Lens spaces are a family of 3-manifolds obtained by identifying the boundaries of two solid tori. The Lens space $L(k,q)$ where $\gcd(k,q)= 1$ is given by identifying the solid tori such that the meridional curve of one solid torus is identified with a $(k,q)$-torus knot on the boundary of the other solid torus. 
     </p>
 
-    <p>The following shows the identification that yields the $S^3 = L(1,0)$</p>
-
-    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/L_1_0.glb" ar-status="not-presenting" width=90vw height=90vh>
+    <div class="small-figure">
+    <p>$S^3 = L(1,0)$</p>
+    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate-delay="0" src="./pics/L_1_0.glb" ar-status="not-presenting">
     </model-viewer>
+    </div>
 
     <p>$S^1 \times S^2 = L(0,1)$</p>
 
@@ -96,10 +108,12 @@
 
     <p>This is the $3$-folded surface $X\subset L(6,1)$ of Euler characteristic $0$.</p>
 
-    <p>This is the $3$-folded surface $X\subset L(9,1)$ of Euler characteristic $-1$.</p>
 
-    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/l9_1_website4.glb" ar-status="not-presenting" width=90vw height=90vh>
+    <div class="big-figure">
+    <p>This is the $3$-folded surface $X\subset L(9,1)$ of Euler characteristic $-1$.</p>
+    <model-viewer ar interaction-prompt="none" camera-controls="" auto-rotate="" auto-rotate-delay="0" src="./pics/l9_1_website4.glb" ar-status="not-presenting" >
     </model-viewer>
+    </div>
 
     <p>One part of the proof involved a generalisation the notion of a compression surgery to define the following surgeries of $3$-folded surfaces.</p>
 
