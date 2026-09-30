@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathematics talk</title>
+<!--
+EDITING
+  Each <section class="slide"> is one slide. Duplicate a section to add one.
+  Write inline mathematics as $ ... $, and display mathematics as \[ ... \].
+  In HTML text, write &lt; for < and &amp; for & (including aligned equations).
+  Change the colours and sizes in :root below.
+
+PRESENTING
+  Open this file in a browser. Arrow keys / Space: next; Shift+Space: previous.
+  Home / End: first / last. F: fullscreen. Browser Print: one slide per page.
+  MathJax loads from the internet. For offline use, install MathJax locally
+  and replace the script URL below with your local tex-chtml.js path.
+  Navigation and styling have no external dependencies.
+-->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', Z: '\\mathbb{Z}', N: '\\mathbb{N}' }
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" onerror="document.getElementById('math-warning').hidden=false"></script>
+<style>
+:root { --paper: #fff; --ink: #181818; --muted: #666; --body-size: 30px; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
+/* A fixed canvas scales to the window, keeping line breaks stable. */
+#deck { width: 1200px; height: 675px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(var(--scale, 1)); }
+.slide { display: none; position: absolute; inset: 0; padding: 66px 86px 72px; overflow: auto; font-size: var(--body-size); line-height: 1.5; }
+.slide.active { display: block; }
+h1, h2 { font-weight: normal; line-height: 1.18; margin: 0 0 38px; }
+h1 { font-size: 58px; max-width: 950px; }
+h2 { font-size: 43px; }
+p { margin: 0 0 24px; }
+ul, ol { margin: 22px 0; padding-left: 1.25em; }
+li { margin: 14px 0; padding-left: 6px; }
+.title-slide.active { display: flex; flex-direction: column; justify-content: center; }
+.title-slide .author { margin-top: 12px; margin-bottom: 5px; }
+.meta { color: var(--muted); font-size: 24px; }
+.statement { margin: 32px 0; }
+.statement p:first-child { margin-bottom: 14px; }
+.statement .label { font-weight: bold; }
+.proof-end { text-align: right; margin-top: 0; }
+a { color: inherit; text-underline-offset: 4px; }
+code { font-size: .8em; }
+mjx-container[display="true"] { margin: 1em 0 !important; }
+#counter { position: absolute; bottom: 26px; right: 40px; color: var(--muted); font: 17px Arial, sans-serif; }
+nav { position: fixed; bottom: 10px; left: 12px; display: flex; gap: 6px; opacity: .25; }
+nav:hover, nav:focus-within { opacity: 1; }
+button { background: white; color: #333; border: 1px solid #bbb; border-radius: 0; padding: 6px 11px; font: 15px Arial, sans-serif; cursor: pointer; }
+button:disabled { opacity: .3; cursor: default; }
+button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
+#math-warning { position: fixed; top: 0; left: 0; right: 0; background: #fff4d6; padding: 10px; font: 14px Arial, sans-serif; }
+@page { size: 320mm 180mm; margin: 0; }
+@media print {
+  #deck { position: static; transform: none; width: auto; height: auto; }
+  .slide, .slide.active { display: block; position: relative; width: 320mm; height: 180mm; padding: 18mm 23mm; overflow: visible; break-after: page; page-break-after: always; }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .title-slide, .title-slide.active { display: flex; flex-direction: column; justify-content: center; }
+  nav, #counter, #math-warning { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="math-warning" role="alert" hidden>MathJax could not load. Connect to the internet and reload to render the equations.</div>
+<main id="deck" aria-label="Presentation">
+  <!-- 1. TITLE -->
+  <section class="slide title-slide active" aria-labelledby="title">
+    <h1 id="title">Title of the mathematics talk</h1>
+    <p class="author">Your name</p>
+    <p class="meta">Your institution</p>
+    <p class="meta">Seminar name · Date</p>
+  </section>
+
+  <!-- 2. MOTIVATION: replace the sample content with your own. -->
+  <section class="slide" aria-labelledby="motivation">
+    <h2 id="motivation">The question</h2>
+    <p>When must a continuous function have a fixed point?</p>
+    <p>Given a map $f\colon X\to X$, we seek $x\in X$ such that</p>
+    \[ f(x)=x. \]
+  </section>
+
+  <!-- 3. DEFINITION -->
+  <section class="slide" aria-labelledby="definition">
+    <h2 id="definition">Fixed points</h2>
+    <div class="statement">
+      <p><span class="label">Definition.</span> A <em>fixed point</em> of a map
+        $f\colon X\to X$ is a point $x\in X$ satisfying $f(x)=x$.</p>
+    </div>
+    <p>For example, $f\colon\R\to\R$, $f(x)=x^2$, has fixed points $0$ and $1$.</p>
+  </section>
+
+  <!-- 4. THEOREM -->
+  <section class="slide" aria-labelledby="theorem">
+    <h2 id="theorem">A fixed point theorem</h2>
+    <div class="statement">
+      <p class="label">Theorem</p>
+      <p>Every continuous map $f\colon[0,1]\to[0,1]$ has a fixed point.</p>
+    </div>
+    <p class="meta">The key ingredient is the intermediate value theorem.</p>
+  </section>
+
+  <!-- 5. PROOF: aligned mathematics uses HTML-escaped ampersands. -->
+  <section class="slide" aria-labelledby="proof">
+    <h2 id="proof">Proof</h2>
+    <p>Let $g(x)=f(x)-x$. Then $g$ is continuous and</p>
+    \[
+      \begin{aligned}
+        g(0)&amp;=f(0)\geq 0,\\
+        g(1)&amp;=f(1)-1\leq 0.
+      \end{aligned}
+    \]
+    <p>The intermediate value theorem gives a point $c\in[0,1]$
+      with $g(c)=0$. Hence $f(c)=c$.</p>
+    <p class="proof-end">$\square$</p>
+  </section>
+
+  <!-- 6. CLOSING. Add further sections before the closing slide as needed. -->
+  <section class="slide title-slide" aria-labelledby="questions">
+    <h1 id="questions">Questions</h1>
+    <p class="meta">Your name · your.email@example.com</p>
+  </section>
+  <div id="counter" aria-live="polite" aria-atomic="true"></div>
+</main>
+<nav aria-label="Slide controls">
+  <button id="previous" type="button" aria-label="Previous slide">←</button>
+  <button id="next" type="button" aria-label="Next slide">→</button>
+  <button id="fullscreen" type="button" aria-label="Toggle fullscreen">Fullscreen</button>
+</nav>
+<noscript><style>.slide { display: block; position: relative; } #deck { position: static; transform: none; height: auto; } nav { display: none; }</style></noscript>
+<script>
+(() => {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const previous = document.getElementById('previous');
+  const next = document.getElementById('next');
+  let current = 0;
+  function fromHash() {
+    const match = location.hash.match(/^#(\d+)$/);
+    return match ? Number(match[1]) - 1 : 0;
+  }
+  function show(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+    document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+    previous.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+  function resize() {
+    document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1200, innerHeight / 675));
+  }
+  async function fullscreen() {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+    } catch (error) { /* Browser fullscreen may be unavailable; normal view still works. */ }
+  }
+  previous.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  document.getElementById('fullscreen').addEventListener('click', fullscreen);
+  document.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey ||
+        event.target.closest('input, textarea, select, button, a, [contenteditable]')) return;
+    switch (event.key) {
+      case 'ArrowRight': case 'PageDown': show(current + 1); break;
+      case 'ArrowLeft': case 'PageUp': show(current - 1); break;
+      case ' ': show(current + (event.shiftKey ? -1 : 1)); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length - 1); break;
+      case 'f': case 'F': fullscreen(); break;
+      default: return;
+    }
+    event.preventDefault();
+  });
+  window.addEventListener('resize', resize);
+  window.addEventListener('hashchange', () => show(fromHash()));
+  resize();
+  show(fromHash());
+})();
+</script>
+</body>
+</html>
