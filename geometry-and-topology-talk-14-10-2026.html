@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/pics/logo.png">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 <title>Mathematics talk</title>
 <!--
 EDITING
@@ -61,13 +63,48 @@ button:disabled { opacity: .3; cursor: default; }
 button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 #math-warning { position: fixed; top: 0; left: 0; right: 0; background: #fff4d6; padding: 10px; font: 14px Arial, sans-serif; }
 @page { size: 320mm 180mm; margin: 0; }
+
+.slide.figure-slide.active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+}
+
+.figure-slide .text {
+  min-width: 0;
+}
+
+.figure-slide .figure {
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figure-slide .figure > model-viewer,
+.figure-slide .figure > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.figure-slide .figure > img {
+  object-fit: contain;
+}
 @media print {
   #deck { position: static; transform: none; width: auto; height: auto; }
   .slide, .slide.active { display: block; position: relative; width: 320mm; height: 180mm; padding: 18mm 23mm; overflow: visible; break-after: page; page-break-after: always; }
   .slide:last-child { break-after: auto; page-break-after: auto; }
   .title-slide, .title-slide.active { display: flex; flex-direction: column; justify-content: center; }
   nav, #counter, #math-warning { display: none; }
+  .slide.figure-slide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+  }
 }
+
 </style>
 </head>
 <body>
@@ -123,6 +160,34 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
       with $g(c)=0$. Hence $f(c)=c$.</p>
     <p class="proof-end">$\square$</p>
   </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
+            <h2>Slide title</h2>
+            <p>Your explanation goes here.</p>
+            <p>Inline mathematics: $f(x)=g(y)$.</p>
+        </div>
+
+        <figure class="figure">
+            <model-viewer
+            src="pics/glbs/l9_1_website.glb"
+            camera-controls
+            alt="A mathematical model">
+            </model-viewer>
+        </figure>
+    </section>
+    
+    <section class="slide figure-slide">
+        <div class="text">
+            <h2>Slide title</h2>
+            <p>Your explanation goes here.</p>
+            <p>Inline mathematics: $f(x)=g(y)$.</p>
+        </div>
+
+        <figure class="figure">
+            <img src="pics/b_2boundarypattern.svg" alt="intersection pattern">
+        </figure>
+    </section>
 
   <!-- 6. CLOSING. Add further sections before the closing slide as needed. -->
   <section class="slide title-slide" aria-labelledby="questions">
