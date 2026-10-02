@@ -107,5 +107,9 @@
        style="fill:none;stroke:#0000ff;stroke-width:0.264583;stroke-linecap:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 15.213543,36.38021 1.322917,1e-6 0.03712,-1.322917"
        id="path8-0" />
+    <path
+       style="fill:none;stroke:none;stroke-width:0.264583;stroke-linecap:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 6.6145838,26.458336 26.458336,6.6145838 46.302085,26.458336 26.458336,46.302085 Z"
+       id="path12" />
   </g>
 </svg>
