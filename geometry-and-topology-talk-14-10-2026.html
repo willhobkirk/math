@@ -153,45 +153,106 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
     </section>
 
+
+    <section class="slide">
+        <h2>Minimal triangulations</h2>
+        <div class="statement">
+            <p class="label">Definition</p>
+            <p>Let $M$ be a $3$-manifold. The <i>complexity</i> $c(M)$ of $M$ is the minimal $n$ such that $\exists \mathcal{T}, |\mathcal{T}|=M$ with $n$ tetrahedra.</p>
+        </div>
+        <p><i>Minimal triangulations</i> are triangulations that obtain this minimum.</p>
+
+    </section>
+
+    <section class="slide">
+        <h2>One vertex triangulations</h2>
+        <div class="statement">
+            <p class="label">Theorem 6.1, Jaco and Rubinstein (2002)</p>
+            <p>If $M$ is closed, orientable and irreducible and $M\not\in \{S^3, \mathbb{R}\mathrm{P}^3,L(3,1)\}$ then any minimal triangulation of $M$ must have a single vertex.</p>
+        </div>
+
+    </section>
+
+    <section class="slide figure-slide">
+        
+        <div class="text">
+            <h2>Bredon and Wood (1969), Rubinstein (1978)</h2>
+            <p>The maximum Euler characteristic of a connected non-orientable surface embedded in $L(2n,1)$ is $2-n$.</p>
+        </div>
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/l6_1_2_website.glb"
+                camera-controls
+                alt="The maximal Euler characteristic connected non-orientable surface that can be embedded in L(6,1)">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide figure-slide">
+        
+        <div class="text">
+            <h2>$c(L(2n,1)) = 2n-3$ for $n>1$</h2>
+            <p>Jaco, Rubinstein, Tillman (2008)</p>
+            <p>Proved using canonical non-orientable surfaces realising the non-trivial class of $H_2(L(2n,1);\mathbb{Z}_2) = \mathbb{Z}_2$.</p>
+        </div>
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/canonicalnonorientable.glb"
+                camera-controls
+                alt="Tetrahedron types of a canonical non-orientable surface.">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide figure-slide">
+        
+        <div class="text">
+            <h2>$\mathbb{Z}_3$-folded surfaces</h2>
+            <p> Recipe: 
+            <ol>
+                <li>Take a compact oriented $2$-manifold $X_{cut}$ and a closed oriented $1$-manifold $\text{Sing}(X)$.</li>
+                <li>Glue $\partial X_{cut}$ onto $\text{Sing}(X)$ by an orientation preserving $3$-sheeted covering map.</li>
+            </ol>
+            The resulting space is a $\mathbb{Z}_3$-folded surface $X$.
+            </p>
+
+        </div>
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/3foldnbhd.glb"
+                camera-controls
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+
+    <section class="slide">
+        <h2>$\mathbb{Z}_3$-folded surfaces represent $H_2(\mathbb{Z}_3)$</h2>
+        <p>$X$ has a fundamental class $[X] \in H_2(\mathbb{Z}_3)$ determined by the fundamental class $[X_{cut}]\in H_2(X_{cut},\partial X_{cut};\mathbb{Z})$.</p>
+        <p>If $X\subset M$ we say $X$ <i>represents</i> the image of $[X]$ in H_2(M;\mathbb{Z}_3)$.</p>
+        <p>If $M$ is a compact orientable $3$-manifold then every class in $H_2(M;\mathbb{Z}_3)$ is represented by an embedded $\mathbb{Z}_3$-folded surface.</p>
+
+    </section>
+
     <section class="slide figure-slide">
 
         <div class="text">
-            <h2>A triangulation of $\mathbb{D}^2 \times S^1$</h2>
-            <p>$\mathcal{T} = (\mathbf{\Delta},\Phi)$</p>
-            <p>$\mathbf{\Delta}$ is a disjoint union of linear tetrahedra</p>
-            <p>$\Phi$ is a collection of isomorphisms of pairs of triangular faces</p>
-            <p>$|\mathcal{T}|$ is the topological quotient of $\mathbf{\Delta}$ by the equivalence relation induced by $\Phi$</p>
+            <h2>$X\subset L(3,1)$</h2>
+            <p>$\text{Sing}(X)$ is a circle</p>
+            <p>$\text{Int}(X)$ is an open disk</p>
         </div>
-
-        
         <figure class="figure">
-            <img src="figure.svg" alt="Description of the figure">
+            <model-viewer
+                src="pics/glbs/canonicalnonorientable.glb"
+                camera-controls
+                alt="Tetrahedron types of a canonical non-orientable surface.">
+            </model-viewer>
         </figure>
-    </section>
 
-
-    <section class="slide figure-slide">
-        <h2>Minimal triangulations</h2>
-        <div class="statement">
-            <p><span class="label">Definition.</span> This is a definition.</p>
-        </div>
-
-    </section>
-
-
-    <section class="slide figure-slide">
-        <h2>$\mathbb{Z}_3$-folded surfaces</h2>
-
-        <div class="statement">
-            <p class="label">Theorem</p>
-            <p>This is a theorem.</p>
-        </div>
-
-    </section>
-
-    <section class="slide figure-slide">
-        <h2>The fundamental class of a $\mathbb{Z}_3$-folded surface</h2>
-  
     </section>
 
     <section class="slide figure-slide">
