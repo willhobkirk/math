@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/x-icon" href="/pics/logo.png">
+<link rel="icon" type="image/png" href="/pics/logo.png">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 <title>Mathematics talk</title>
 <!--
 EDITING
-  Each <section class="slide figure-slide"> is one slide. Duplicate a section to add one.
+  Each <section class="slide"> is one slide.
+  Add figure-slide for text + figure, or two-figures for a heading + two figures. Duplicate a section to add one.
   Write inline mathematics as $ ... $, and display mathematics as \[ ... \].
   In HTML text, write &lt; for < and &amp; for & (including aligned equations).
   Change the colours and sizes in :root below.
@@ -18,6 +19,7 @@ PRESENTING
   Home / End: first / last. F: fullscreen. Browser Print: one slide per page.
   MathJax loads from the internet. For offline use, install MathJax locally
   and replace the script URL below with your local tex-chtml.js path.
+  Model-viewer also loads from the internet.
   Navigation and styling have no external dependencies.
 -->
 <script>
@@ -31,142 +33,154 @@ window.MathJax = {
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" onerror="document.getElementById('math-warning').hidden=false"></script>
 <style>
-:root { --paper: #fff; --ink: #181818; --muted: #666; --body-size: 30px; }
+/* Theme and typography */
+:root {
+  --paper: #fff;
+  --ink: #181818;
+  --muted: #666;
+  --body-size: 30px;
+  --figure-gap: 40px;
+}
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
-/* A fixed canvas scales to the window, keeping line breaks stable. */
-#deck { width: 1200px; height: 675px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(var(--scale, 1)); }
-.slide { display: none; position: absolute; inset: 0; padding: 66px 86px 72px; overflow: auto; font-size: var(--body-size); line-height: 1.5; }
-.slide.active { display: block; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+}
 h1, h2 { font-weight: normal; line-height: 1.18; margin: 0 0 38px; }
 h1 { font-size: 58px; max-width: 950px; }
 h2 { font-size: 43px; }
 p { margin: 0 0 24px; }
 ul, ol { margin: 22px 0; padding-left: 1.25em; }
 li { margin: 14px 0; padding-left: 6px; }
-.title-slide.active { display: flex; flex-direction: column; justify-content: center; }
-.title-slide .author { margin-top: 12px; margin-bottom: 5px; }
+a { color: inherit; text-underline-offset: 4px; }
+code { font-size: .8em; }
 .meta { color: var(--muted); font-size: 24px; }
 .statement { margin: 32px 0; }
 .statement p:first-child { margin-bottom: 14px; }
 .statement .label { font-weight: bold; }
 .proof-end { text-align: right; margin-top: 0; }
-a { color: inherit; text-underline-offset: 4px; }
-code { font-size: .8em; }
 mjx-container[display="true"] { margin: 1em 0 !important; }
-#counter { position: absolute; bottom: 26px; right: 40px; color: var(--muted); font: 17px Arial, sans-serif; }
-nav { position: fixed; bottom: 10px; left: 12px; display: flex; gap: 6px; opacity: .25; }
-nav:hover, nav:focus-within { opacity: 1; }
-button { background: white; color: #333; border: 1px solid #bbb; border-radius: 0; padding: 6px 11px; font: 15px Arial, sans-serif; cursor: pointer; }
-button:disabled { opacity: .3; cursor: default; }
-button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
-#math-warning { position: fixed; top: 0; left: 0; right: 0; background: #fff4d6; padding: 10px; font: 14px Arial, sans-serif; }
-@page { size: 320mm 180mm; margin: 0; }
 
-.slide.figure-slide.active {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
+/* Fixed slide canvas; the navigation script scales it to the window. */
+#deck {
+  width: 1200px;
+  height: 675px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
 }
+.slide {
+  display: none;
+  position: absolute;
+  inset: 0;
+  padding: 66px 86px 72px;
+  overflow: auto;
+  font-size: var(--body-size);
+  line-height: 1.5;
+}
+.slide.active { display: block; }
+.title-slide { flex-direction: column; justify-content: center; }
+.title-slide.active { display: flex; }
+.title-slide .author { margin-top: 12px; margin-bottom: 5px; }
 
-.figure-slide .text {
-  min-width: 0;
+/* Two layouts: text + figure, or a full-width heading + two figures. */
+.figure-slide, .two-figures {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--figure-gap);
 }
+.figure-slide { grid-template-rows: minmax(0, 1fr); }
+.two-figures { grid-template-rows: auto minmax(0, 1fr); }
+.slide.figure-slide.active, .slide.two-figures.active { display: grid; }
+.two-figures > h2, .figure-slide > h2 { grid-column: 1 / -1; }
+.figure-slide .text { min-width: 0; min-height: 0; }
+.figure-slide .text > img { display: block; max-width: 100%; height: auto; }
 
-.figure-slide .figure {
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.slide .figure {
+/* Optional figure heading, with media filling the remaining height. */
+.slide .figure, .two-figures > figure {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-width: 0;
   min-height: 0;
   margin: 0;
 }
-
-.slide .figure > h3 {
+.slide .figure > h3, .two-figures > figure > h3 {
   flex: 0 0 auto;
   margin: 0 0 20px;
   font-size: 30px;
   font-weight: normal;
   text-align: center;
 }
-
 .slide .figure > img,
-.slide .figure > model-viewer {
+.slide .figure > model-viewer,
+.two-figures > figure > img,
+.two-figures > figure > model-viewer {
   display: block;
   flex: 1 1 0;
   width: 100%;
   height: 0;
-  min-height: 0;
-  object-fit: contain;
-}
-
-.figure-slide .figure > model-viewer,
-.figure-slide .figure > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.figure-slide .figure > img {
-  object-fit: contain;
-}
-.slide.two-figures.active {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: auto minmax(0, 1fr);
-  column-gap: 40px;
-}
-
-.two-figures > h2 {
-  grid-column: 1 / -1;
-}
-
-.two-figures > figure {
-  margin: 0;
   min-width: 0;
   min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+.slide .figure > img, .two-figures > figure > img { object-fit: contain; }
+
+/* Hide model-viewer's built-in loading bar, not its camera controls. */
+model-viewer::part(default-progress-bar) { display: none; }
+
+/* Presentation controls */
+#counter {
+  position: absolute;
+  bottom: 26px;
+  right: 40px;
+  color: var(--muted);
+  font: 17px Arial, sans-serif;
+}
+nav { position: fixed; bottom: 10px; left: 12px; display: flex; gap: 6px; opacity: .25; }
+nav:hover, nav:focus-within { opacity: 1; }
+button {
+  background: white;
+  color: #333;
+  border: 1px solid #bbb;
+  border-radius: 0;
+  padding: 6px 11px;
+  font: 15px Arial, sans-serif;
+  cursor: pointer;
+}
+button:disabled { opacity: .3; cursor: default; }
+button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
+#math-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff4d6;
+  padding: 10px;
+  font: 14px Arial, sans-serif;
 }
 
-.two-figures > figure > img,
-.two-figures > figure > model-viewer {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.two-figures > figure > img {
-  object-fit: contain;
-}
-
-@media print {
-  .slide.two-figures {
-    display: grid;
-  }
-}
-
+/* Print every slide, retaining the same column layouts. */
+@page { size: 320mm 180mm; margin: 0; }
 @media print {
   #deck { position: static; transform: none; width: auto; height: auto; }
-  .slide, .slide.active { display: block; position: relative; width: 320mm; height: 180mm; padding: 18mm 23mm; overflow: visible; break-after: page; page-break-after: always; }
-  .slide:last-child { break-after: auto; page-break-after: auto; }
-  .title-slide, .title-slide.active { display: flex; flex-direction: column; justify-content: center; }
-  nav, #counter, #math-warning { display: none; }
-  .slide.figure-slide {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 40px;
+  .slide, .slide.active {
+    display: block;
+    position: relative;
+    width: 320mm;
+    height: 180mm;
+    padding: 18mm 23mm;
+    overflow: visible;
+    break-after: page;
+    page-break-after: always;
   }
+  .slide:last-of-type { break-after: auto; page-break-after: auto; }
+  .slide.title-slide { display: flex; }
+  .slide.figure-slide, .slide.two-figures { display: grid; }
+  nav, #counter, #math-warning { display: none; }
 }
-
 </style>
 </head>
 <body>
