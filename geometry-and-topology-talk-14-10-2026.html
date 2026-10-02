@@ -91,6 +91,43 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 .figure-slide .figure > img {
   object-fit: contain;
 }
+.slide.two-figures.active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: 40px;
+}
+
+.two-figures > h2 {
+  grid-column: 1 / -1;
+}
+
+.two-figures > figure {
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.two-figures > figure > img,
+.two-figures > figure > model-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.two-figures > figure > img {
+  object-fit: contain;
+}
+
+@media print {
+  .slide.two-figures {
+    display: grid;
+  }
+}
+
 @media print {
   #deck { position: static; transform: none; width: auto; height: auto; }
   .slide, .slide.active { display: block; position: relative; width: 320mm; height: 180mm; padding: 18mm 23mm; overflow: visible; break-after: page; page-break-after: always; }
@@ -176,6 +213,24 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     <section class="slide figure-slide">
         
         <div class="text">
+            <h2>Lens spaces</h2>
+            <p>Orientable $3$-manifolds that admit genus $1$ Heegaard decompositions.</p>
+            <p>$L(p,q)$ is obtained by identifying two solid tori such that a meridional curve of one is identified with a $(p,q)$-torus knot on the boundary of the other.</p>
+        </div>
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/L_7_2.glb"
+                camera-controls
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+    
+
+    <section class="slide figure-slide">
+        
+        <div class="text">
             <h2>Bredon and Wood (1969), Rubinstein (1978)</h2>
             <p>The maximum Euler characteristic of a connected non-orientable surface embedded in $L(2n,1)$ is $2-n$.</p>
         </div>
@@ -238,6 +293,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
     </section>
 
+
     <section class="slide figure-slide">
 
         <div class="text">
@@ -247,28 +303,45 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         <figure class="figure">
             <model-viewer
-                src="pics/glbs/canonicalnonorientable.glb"
+                src="pics/glbs/l3_1_norm.glb"
                 camera-controls
-                alt="Tetrahedron types of a canonical non-orientable surface.">
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide two-figures">
+
+        <h2>Some $\mathbb{Z}_3$-folded surfaces are <i>better</i> than others</h2>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/l3_1_norm.glb"
+                camera-controls
+                alt="">
+            </model-viewer>
+        </figure>
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/l3_1_norm.glb"
+                camera-controls
+                alt="">
             </model-viewer>
         </figure>
 
     </section>
 
     <section class="slide figure-slide">
-        <h2>Canonical $\mathbb{Z}_3$-folded surfaces</h2>
-  
-    </section>
-
-    <section class="slide figure-slide">
         <h2>The $\mathbb{Z}_3$-Thurston norm and $\chi_3$</h2>
+
+        $\
   
     </section>
 
-    <section class="slide figure-slide">
-        <h2>Lens spaces</h2>
-  
-    </section>
+
+
+
 
     <section class="slide figure-slide">
         <h2>Equivalent genus $1$ Heegaard decompositions</h2>
@@ -339,6 +412,23 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     <section class="slide figure-slide">
         <h2>$\chi_3(L(9,1))= -1$</h2>
         
+    </section>
+
+    <section class="slide figure-slide">
+        
+        <div class="text">
+            <h2>Canonical $\mathbb{Z}_3$-folded surfaces</h2>
+            <p>Depend only on a choice of cellular $\mathbb{Z}_3$ 1-cocycle representing the dual $H^1(M;\mathbb{Z}_3)$ class.</p>
+        </div>
+
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/canonical3fold.glb"
+                camera-controls
+                alt="">
+            </model-viewer>
+        </figure>
+  
     </section>
 
     <section class="slide figure-slide">
