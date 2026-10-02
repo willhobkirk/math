@@ -317,14 +317,14 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         
         <figure class="figure">
             <model-viewer
-                src="pics/glbs/l3_1_norm.glb"
+                src="pics/glbs/l3_1_bubble.glb"
                 camera-controls
                 alt="">
             </model-viewer>
         </figure>
         <figure class="figure">
             <model-viewer
-                src="pics/glbs/l3_1_norm.glb"
+                src="pics/glbs/l3_1_handle.glb"
                 camera-controls
                 alt="">
             </model-viewer>
@@ -332,16 +332,40 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
     </section>
 
-    <section class="slide figure-slide">
-        <h2>The $\mathbb{Z}_3$-Thurston norm and $\chi_3$</h2>
-
-        $\
+    <section class="slide">
+        <h2>The $\mathbb{Z}_3$-Thurston norm $||\cdot||_{\mathbb{Z}_3}$</h2>
+        <p>A function on homology that characterises how <i>complicated</i> the set of realisations of a $H_2(\mathbb{Z}_3)$ class is.</p>
+        <p>\[ ||x||_{\mathbb{Z}_3} := \max_{[X]=x} \sum_{X_0\in \pi_0(\text{Int}(X))} \max(-\chi(X_0),0)\]</p>
   
     </section>
 
+    <section class="slide figure-slide">
+        
+        <div class="text">
+            <h2>Canonical $\mathbb{Z}_3$-folded surfaces $S_{\varphi}(\mathcal{T})$</h2>
+            <p>Depend only on a triangulation $\mathcal{T}$ and a choice of cellular $\mathbb{Z}_3$ 1-cocycle $\varphi$ representing the dual $H^1(M;\mathbb{Z}_3)$ class.</p>
+            <p>When $\mathcal{T}$ has one vertex $S_{\varphi}(\mathcal{T})$ does not separate the ambient space.</p>
+        </div>
 
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/canonical3fold.glb"
+                camera-controls
+                alt="">
+            </model-viewer>
+        </figure>
+  
+    </section>
 
-
+    <section class="slide">
+        <h2>The $\chi_3$ function</h2>
+        <p>$\chi_3(x)$ is the maximum Euler characteristic of a $\mathbb{Z}_3$-folded surface $X$ representing $x$ which does not separate the ambient space.</p>
+        <div class="statement">
+            <p class="label">Lemma</p>
+            <p>If $M$ is a closed orientable $3$-manifold with $H_2(M;\mathbb{Z}_3)=\mathbb{Z}_3$ then $||x||_{\mathbb{Z}_3} = \max(0,-\chi_3(x))$.</p>
+        </div>
+  
+    </section>
 
     <section class="slide figure-slide">
         <h2>Equivalent genus $1$ Heegaard decompositions</h2>
@@ -414,22 +438,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         
     </section>
 
-    <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>Canonical $\mathbb{Z}_3$-folded surfaces</h2>
-            <p>Depend only on a choice of cellular $\mathbb{Z}_3$ 1-cocycle representing the dual $H^1(M;\mathbb{Z}_3)$ class.</p>
-        </div>
-
-        <figure class="figure">
-            <model-viewer
-                src="pics/glbs/canonical3fold.glb"
-                camera-controls
-                alt="">
-            </model-viewer>
-        </figure>
-  
-    </section>
+    
 
     <section class="slide figure-slide">
         <h2>Tetrahedron types and $\chi(S_{\varphi})$</h2>
