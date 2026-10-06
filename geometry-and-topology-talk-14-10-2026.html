@@ -182,6 +182,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p class="meta">Geometry and Topology Seminar · 14/10/2026</p>
     </section>
 
+    <section class="slide">
+        <h2>Abstract</h2>
+        <p>In this talk, we introduce $\mathbb{Z}_3$-folded surfaces -- geometric representatives of classes in $H_2(M;\mathbb{Z}_3)$ for a $3$-manifold $M$. We define the $\mathbb{Z}_3$-Thurston “norm”, which measures the minimum complexity of these representatives. This function generalises the $\mathbb{Z}_2$-Thurston norm and provides information about triangulations of $M$. We determine the $\mathbb{Z}_3$-Thurston norm for the family of lens spaces $L(3n,1)$, uncovering some interesting properties of $\mathbb{Z}_3$-folded surfaces along the way. As a corollary, we show that any triangulation of $L(3n,1)$ must have at least $n$ tetrahedra. A refinement of this approach determines the exact minimum number of tetrahedra required to triangulate these spaces, in forthcoming joint work with Jonathan Spreer.</p>
+
+    </section>
+
 
     <section class="slide figure-slide">
 
@@ -207,7 +213,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         <figure class="figure">
             <h3>$|\mathcal{T}|$</h3>
-            <model-viewer>
+            <model-viewer
                 src="pics/glbs/one_vertex_solid_torus.glb"
                 camera-controls interaction-prompt="none"
                 alt="A solid torus">
@@ -393,13 +399,107 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
   
     </section>
 
-    <section class="slide figure-slide">
+    <section class="slide two-figures">
+
+        <h2>\textbf{Theorem:\} $\chi_3(x)=2-n$ when $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$</h2>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/l6_1_3_website.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/l9_1_website.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide two-figures">
+
         <h2>Equivalent genus $1$ Heegaard decompositions</h2>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/equivalent_heegaard_before.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/equivalent_heegaard_after.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide figure-slide">
+        <p>Let $X$ be a $\mathbb{Z}_3$-folded surface of maximal Euler characteristic in $L(3n,1)$ with the property that $L(3n,1)\setminus X$ is connected.</p>
+        <p>Choose a genus $1$ Heegaard decomposition of $L(3n,1)$ that is <i>"adapted"</i> to $X$.</p>
+
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/disk_intersection.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
   
     </section>
 
     <section class="slide figure-slide">
+        <p>A Heegaard splitting of $L(3,1)$ that is <i>adapted</i> to a non-separating $\mathbb{Z}_3$-folded surface.</p>
+
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/adapted_l3_1.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+  
+    </section>
+
+    <section class="slide two-figures">
+
         <h2>Meridional intersection patterns</h2>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/adapted_l3_1_meridional_disk.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+        
+        <figure class="figure">
+            <model-viewer
+                src="pics/glbs/adapted_l3_1_meridional_disk_cut.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </figure>
+
+    </section>
+
+    <section class="slide figure-slide">
+        <h2>Meridional intersection patterns</h2>
+        <p>$\mathbb{Z}_3$-folded $1$-manifolds are the $1$-dimensional analogues of $\mathbb{Z}_3$-folded surfaces.</p>
+        <p>Meridional intersection patterns are $\mathbb{Z}_3$-folded $1$-manifolds properly embedded in a disk.</p>
+
+        <figure class="figure">
+            <img src="pics/meridionaldiskdiagrams.svg" alt="Meridional intersection patterns">
+        </figure>
   
     </section>
 
