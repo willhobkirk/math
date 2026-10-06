@@ -6,22 +6,8 @@
 <link rel="icon" type="image/png" href="/pics/logo.png">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 <title>Mathematics talk</title>
-<!--
-EDITING
-  Each <section class="slide"> is one slide.
-  Add figure-slide for text + figure, or two-figures for a heading + two figures. Duplicate a section to add one.
-  Write inline mathematics as $ ... $, and display mathematics as \[ ... \].
-  In HTML text, write &lt; for < and &amp; for & (including aligned equations).
-  Change the colours and sizes in :root below.
 
-PRESENTING
-  Open this file in a browser. Arrow keys / Space: next; Shift+Space: previous.
-  Home / End: first / last. F: fullscreen. Browser Print: one slide per page.
-  MathJax loads from the internet. For offline use, install MathJax locally
-  and replace the script URL below with your local tex-chtml.js path.
-  Model-viewer also loads from the internet.
-  Navigation and styling have no external dependencies.
--->
+
 <script>
 window.MathJax = {
   tex: {
@@ -221,7 +207,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         <figure class="figure">
             <h3>$|\mathcal{T}|$</h3>
-            <model-viewer
+            <model-viewer>
                 src="pics/glbs/one_vertex_solid_torus.glb"
                 camera-controls interaction-prompt="none"
                 alt="A solid torus">
@@ -328,7 +314,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     <section class="slide">
         <h2>$\mathbb{Z}_3$-folded surfaces represent $H_2(\mathbb{Z}_3)$</h2>
         <p>$X$ has a fundamental class $[X] \in H_2(\mathbb{Z}_3)$ determined by the fundamental class $[X_{cut}]\in H_2(X_{cut},\partial X_{cut};\mathbb{Z})$.</p>
-        <p>If $X\subset M$ we say $X$ <i>represents</i> the image of $[X]$ in H_2(M;\mathbb{Z}_3)$.</p>
+        <p>If $X\subset M$ we say $X$ <i>represents</i> the image of $[X]$ in $H_2(M;\mathbb{Z}_3)$.</p>
         <p>If $M$ is a compact orientable $3$-manifold then every class in $H_2(M;\mathbb{Z}_3)$ is represented by an embedded $\mathbb{Z}_3$-folded surface.</p>
 
     </section>
