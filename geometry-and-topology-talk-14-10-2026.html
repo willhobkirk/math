@@ -205,9 +205,9 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
     </section>
 
-    <section class="slide figure-slide">
+    <section class="slide two-figures">
 
-        <div class="text">
+        <div class="figure">
             <h2>$\mathcal{T}$</h2>
             <img src="pics/solidtorustriangulation.svg" alt="A triangulation of a solid torus">
         </div>
@@ -401,7 +401,10 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
     <section class="slide two-figures">
 
-        <h2><b>Theorem:</b> $\chi_3(x)=2-n$ for any $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$</h2>
+        <div class="statement">
+            <p class="label">Theorem:</p>
+            <p>$\chi_3(x)=2-n$ for any $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$</p>
+        </div>
         
         <figure class="figure">
           <h3>$L(6,1)$</h3>
@@ -510,39 +513,250 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
 
     <section class="slide figure-slide">
+        <div class="text">
         <h2>Disk compressions</h2>
+        <p>The compressing disk $D$ is embedded such that:</p> 
+        <ul>
+            <li>$D\cap X = \partial D$</li>
+            <li>$\partial D\subset \text{Int}(X)$.</li>
+        </ul>
+        </div>
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/0compression.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+    </section>
+    
+    <section class="slide figure-slide">
+        <div class="text">
+        <h2>Incompressibility</h2>
+        <p>If $X$ is a non-separating $\mathbb{Z}_3$-folded surface of maximal Euler characteristic it follows that $\partial D$ bounds a disk in $\text{Int}(X)$</p>
+        </div>
+
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/blank.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
+        <div class="text">
         <h2><i>Reduced</i> disk compressions</h2>
+        <p>A disk compression followed by deletion of the separating $2$-sphere created.</p>
+        </div>
+        <div class = "figure">
+            <model-viewer
+                src="pics/glbs/blank.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer> 
+
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
+        <div class="text">
         <h2>$2$-compressions</h2>
+        <p>The compressing disk $D$ is embedded such that:</p> 
+        <ul>
+            <li>$D\cap X = \partial D$</li>
+            <li>$\partial D\cap \text{Sing}(X)$ is a set of $2$ points.</li>
+            <li>$\partial D\cap \text{Int}(X)$ is a union of $2$ open intervals.</li>
+        </ul>
+        </div>
+
+        <div class = "figure">
+            <model-viewer
+                src="pics/glbs/2compression.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
-        <h2>Reduced $2$-compressions</h2>
+        <div class="text">
+        <h2>$2$-incompressibility</h2>
+        <p>If $X$ is a non-separating $\mathbb{Z}_3$-folded surface of maximal Euler characteristic it follows that there exists an interval $I$ in $\text{Sing}(X)$ such that the theta graph $I \cup \partial D$ bounds a pair of disks in $\text{Int}(X)$.</p>
+        </div>
+
+        <div class = "figure">
+            <model-viewer
+                src="pics/glbs/blank.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
+        <div class="text">
+        <h2>Reduced $2$-compression surgeries</h2>
+        <p>A $2$-compression followed by <i>deletion</i> of the <i>bubble</i> created.</p>
+        <p>Preserves the Euler characteristic and the property of not separating the ambient space.</p>
+        </div>
+        <div class="figure">
+
+        </div>
+  
+    </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
         <h2>$4$-compressions</h2>
+        <p>The compressing disk $D$ is embedded such that:</p> 
+        <ul>
+            <li>$D\cap X = \partial D$</li>
+            <li>$\partial D\cap \text{Sing}(X)$ is a set of four points.</li>
+            <li>$\partial D\cap \text{Int}(X)$ is a union of four open intervals.</li>
+        </ul>
+        </div>
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/4compression.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
+        <div class="text">
+        <h2>Reduced $4$-compressions</h2>
+        <ol>
+            <li>Perform a $4$-compression.</li>
+            <li>If this results in a $\mathbb{Z}_3$-folded surface that separates the ambient space, a non-separating $\mathbb{Z}_3$-folded surface of the same Euler characteristic can be recovered by removing some components of the interior.</li>
+        </ol>
+        </div>
+
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/4compression.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+  
+    </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
         <h2>Induced operations on meridional intersection patterns</h2>
+        <p>We use the reduced compression surgeries to eliminate all <i>bigons</i>, <i>quads</i> and simple closed curves from the meridional intersection pattern.</p>
+        </div>
+
+        <div class="figure">
+            <img src="pics/induced_operations_compression.svg" alt="induced operations on meridional intersection patterns">
+
+        </div>
+  
+    </section>
+
+    <section class="slide two-figures">
+        <p>The resulting meridional intersection pattern must admit a subcomplex that looks like one of the following:</p>
+        
+        <div class="figure">
+            <img src="pics/intervalbetterintersectionarcs.svg" alt="disk reduction">
+        </div>
+
+        <div class="figure">
+            <img src="pics/b3tob3interval.svg" alt="disk reduction">
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
-        <h2>Reduction to a single meridional disk</h2>
+        <div class="text">
+            <p>These subcomplexes allow us to reduce the number of meridional disks.</p>
+
+        </div>
+        
+        
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/empty.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+
   
     </section>
+
+    <section class="slide two-figures">
+        <h2>Snake/finger moves</h2>
+        <p>Meridional intersection patterns can be further manipulated by performing ambient isotopies to the $\mathbb{Z}_3$-folded surface.</p>
+
+        <div class = "figure">
+            <model-viewer
+                src="pics/glbs/cylinder_snake_glb.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+
+        <div class = "figure">
+            <model-viewer
+                src="pics/glbs/cylinder_snake_after_glb.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+
+    </section>
+
+    <section class = "slide figure-slide">
+        <div class="text">
+            <p>We simplify meridional intersection patterns further by combining these snake/finger moves with the reduced $4$-compression surgery.</p>
+        </div>
+
+        <div class = "figure">
+            <img src="pics/snakemove.svg" alt="disk reduction">
+        </div>
+
+    </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
+            <p><i>Minimal</i> meridional intersection patterns always have at least one <i>boundary tripod</i>.</p>
+        </div>
+
+        <div class="figure">
+            <img src="pics/boundarytripodbigon.svg" alt="disk reduction">
+        </div>
+    </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
+            <p>Cut the second solid torus along the meridional intersection disk. This gives us a $\mathbb{Z}_3$-folded surface with boundary properly embedded in a $3$-ball.</p>
+        </div>
+
+        <div class="figure">
+            <img src="pics/3ball.svg" alt="disk reduction">
+        </div>
+    </section>
+
+    <section class="slide figure-slide">
+        <div class="text">
+            <p>Boundary tripods imply the existence of bigons in the boundary pattern.</p>
+        </div>
+
+        <div class="figure">
+            <img src="pics/boundarytripodbigon.svg" alt="disk reduction">
+        </div>
+    </section>
+
 
     <section class="slide figure-slide">
         <h2>$\chi_3(L(3n,1))\leq \chi_3(L(3(n-1),1))-1$ for all $n>1$</h2>
@@ -569,7 +783,6 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         
     </section>
 
-    
 
     <section class="slide figure-slide">
         <h2>Tetrahedron types and $\chi(S_{\varphi})$</h2>
