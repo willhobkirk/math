@@ -84,6 +84,30 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
 .figure-slide .text { min-width: 0; min-height: 0; }
 .figure-slide .text > img { display: block; max-width: 100%; height: auto; }
 
+.slide.centered-slide {
+    padding: 66px 86px; /* Equal top/bottom padding */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide.centered-slide.active {
+    display: flex;
+}
+
+.centered-slide > p {
+    margin: 0;
+    font-size: 72px;
+    line-height: 1.2;
+}
+
+@media print {
+    .slide.centered-slide {
+        display: flex;
+        padding: 18mm 23mm;
+    }
+}
+
 /* Optional figure heading, with media filling the remaining height. */
 .slide .figure, .two-figures > figure {
   display: flex;
@@ -212,7 +236,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <img src="pics/solidtorustriangulation.svg" alt="A triangulation of a solid torus">
         </div>
         <figure class="figure">
-            <h3>$|\mathcal{T}|$</h3>
+            <h2>$|\mathcal{T}|$</h2>
             <model-viewer
                 src="pics/glbs/one_vertex_solid_torus.glb"
                 camera-controls interaction-prompt="none"
@@ -407,7 +431,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         
         <figure class="figure">
-          <h3>$L(6,1)$</h3>
+          <h3>$\chi_3(L(6,1)) = 0$</h3>
             <model-viewer
                 src="pics/glbs/l6_1_3_website.glb"
                 camera-controls interaction-prompt="none"
@@ -416,7 +440,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </figure>
 
         <figure class="figure">
-          <h3>$L(9,1)$</h3>
+          <h3>$\chi_3(L(9,1)) = -1$</h3>
             <model-viewer
                 src="pics/glbs/l9_1_website.glb"
                 camera-controls interaction-prompt="none"
@@ -538,7 +562,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         <div class="figure">
             <model-viewer
-                src="pics/glbs/blank.glb"
+                src="pics/glbs/incompressibility.glb"
                 camera-controls interaction-prompt="none"
                 alt="">
             </model-viewer>
@@ -553,7 +577,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         <div class = "figure">
             <model-viewer
-                src="pics/glbs/blank.glb"
+                src="pics/glbs/reducedcompression.glb"
                 camera-controls interaction-prompt="none"
                 alt="">
             </model-viewer> 
@@ -591,7 +615,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         <div class = "figure">
             <model-viewer
-                src="pics/glbs/blank.glb"
+                src="pics/glbs/2incompressibility.glb"
                 camera-controls interaction-prompt="none"
                 alt="">
             </model-viewer>
@@ -606,7 +630,11 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p>Preserves the Euler characteristic and the property of not separating the ambient space.</p>
         </div>
         <div class="figure">
-
+            <model-viewer
+                src="pics/glbs/reduced2compression.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
         </div>
   
     </section>
@@ -642,7 +670,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         <div class="figure">
             <model-viewer
-                src="pics/glbs/4compression.glb"
+                src="pics/glbs/reduced4compression.glb"
                 camera-controls interaction-prompt="none"
                 alt="">
             </model-viewer>
@@ -685,7 +713,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         
         <div class="figure">
             <model-viewer
-                src="pics/glbs/empty.glb"
+                src="pics/glbs/meridionaldiskreductionL31.glb"
                 camera-controls interaction-prompt="none"
                 alt="">
             </model-viewer>
@@ -694,7 +722,25 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
   
     </section>
 
-    <section class="slide two-figures">
+    <section class="slide figure-slide">
+        <div class="text">
+            <p>Repeat this process until we have only a single meridional disk in the intersection with the first solid torus.</p>
+
+        </div>
+        
+        
+        <div class="figure">
+            <model-viewer
+                src="pics/glbs/l3_1_norm_1.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+
+  
+    </section>
+
+        <section class="slide two-figures">
         <h2>Snake/finger moves</h2>
         <p>Meridional intersection patterns can be further manipulated by performing ambient isotopies to the $\mathbb{Z}_3$-folded surface.</p>
 
@@ -733,9 +779,10 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <img src="pics/boundarytripodbigon.svg" alt="disk reduction">
+            <img src="pics/boundarytripod.svg" alt="disk reduction">
         </div>
     </section>
+
 
     <section class="slide figure-slide">
         <div class="text">
@@ -759,52 +806,107 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
 
     <section class="slide figure-slide">
-        <h2>$\chi_3(L(3n,1))\leq \chi_3(L(3(n-1),1))-1$ for all $n>1$</h2>
+        <div class="text">
+            <p>A cut and glue operation using this bigon and reduced $2$-compression yields a non-separating $\mathbb{Z}_3$-folded surface in $L(3(n-1),1)$ from one in $L(3n,1)$.</p>
+            <p>It follows that $\chi_3(L(3n,1))\leq \chi_3(L(3(n-1),1))-1$ for all $n>1$</p>
+            <p>We already know that $\chi_3(L(3,1))=1$ so $\chi_3(L(3n,1))\leq 2-n$.
+
+        </div>
+
+        <div class="figure">
+            <img src="pics/newD_Yboundarypattern.svg" alt="disk reduction">
+        </div>
+  
+    </section>
+
+    <section class="slide two-figures">
+        <h2>$\chi_3(L(3n,1))\geq 2-n$ by example.</h2>
+        <div class="figure">
+            <p>A family of particularly nice meridional intersection patterns.</p>
+            <img src="pics/nicemeridionalint.svg" alt="disk reduction">
+        </div>
+
+        <div class="figure">
+            <p>A family of non-separating $\mathbb{Z}_3$-folded surfaces.</p>
+            <model-viewer
+                src="pics/glbs/nice3folded.glb"
+                camera-controls interaction-prompt="none"
+                alt="">
+            </model-viewer>
+        </div>
+
+    </section>
+
+    <section class="slide centered-slide">
+        <p>Hence $\chi_3(L(3n,1))=2-n$!</p>
+    </section>
+
+    <section class="slide centered-slide">
+        <p>What does this have to do with triangulation complexity?</p>
+    </section>
+
+
+    <section class="slide figure-slide">
+        <div class="text">
+            <p>Fix a minimal one-vertex triangulation of $L(3n,1)$ and let $X$ be a canonical $\mathbb{Z}_3$-folded surface.</p>
+            <p>There are four ways $X$ can intersect a tetrahedron.</p>
+            <p>We can partition the edges into $\mathfrak{e}$ <i>even</i> edges and $\mathfrak{o}$ <i>odd</i> edges.</p>
+        </div>
+
+        <div class = "figure">
+            <img src="pics/p3tetrahedrontypes.svg" alt="disk reduction">
+        </div>
   
     </section>
 
     <section class="slide figure-slide">
-        <h2>$\chi_3(L(3n,1))\leq \chi_3(L(3(n+1),1))+1$ for all $n>0$</h2>
+        <div class="text">
+            <p>$X$ has the same Euler characteristic as its complement.</p>
+            <p>The complement of $X$ deformation retracts onto the subcomplex spanned by the <i>even</i> edges.</p>
+            <p>Hence $\chi(X) = 1 - \mathfrak{e} + \frac{B+4C}{2} - C</p>
+        </div>
+
+        <div class = "figure">
+            <img src="pics/deformationretraction.svg" alt="disk reduction">
+        </div>
   
     </section>
 
-    <section class="slide figure-slide">
-        <h2>$\chi_3(L(3,1))= 1$ and $\chi_3(L(3n,1)) = 2-n$</h2>
-        
+    <section class="slide">
+        <h2>$\mathfrak{e} \geq n-1$</h2>
+        <p>$X$ is non-separating since the triangulation has one vertex.</p>
+        <p>Hence $\chi(X) \leq \chi_3(L(3n,1))= 2-n$.</p>
+        <p>Moreover, $1-\mathfrak{e} \leq \chi(X)$ so $\mathfrak{e} \geq n-1$.</p>
     </section>
 
     <section class="slide figure-slide">
-        <h2>$\chi_3(L(6,1))= 0$</h2>
-        
-    </section>
+        <div class="text">
+            <h2>$\mathfrak{o} \geq 2$ if $n>1$</h2>
+            <p>$\mathfrak{o}> 0$ since $X$ is non-empty.</p>
+            <p>$\mathfrak{o}= 1$ implies that a $\mathbb{Z}_3$-crosscap embeds in $L(3n,1)$.</p>
+            <p>But $\chi_3(L(3n,1)) = 2-n < 1$! </p>
+        </div>
 
-    <section class="slide figure-slide">
-        <h2>$\chi_3(L(9,1))= -1$</h2>
-        
-    </section>
-
-
-    <section class="slide figure-slide">
-        <h2>Tetrahedron types and $\chi(S_{\varphi})$</h2>
+        <div class="figure">
+            <img src="pics/Z3crosscap.svg" alt="disk reduction">
+        </div>
   
     </section>
 
-    <section class="slide figure-slide">
-        <h2>$\mathfrak{o}>1$ and $\mathfrak{e}\geq n-1$</h2>
-  
-    </section>
-
-    <section class="slide figure-slide">
+    <section class="slide">
         <h2>$c(L(3n,1)) \geq n$</h2>
+        <p>$\chi(L(3n,1))=0 = 1-\mathfrak{e}-\mathfrak{o} + \frac{4c(L(3n,1))}{2} - c(L(3n,1))$</p>
+        <p>Hence, $c(L(3n,1)) = \mathfrak{e}+\mathfrak{o} - 1$</p>
+        <p>Hence, $c(L(3n,1)) \geq n-1 +2 - 1 = n$</p>
   
     </section>
 
-    <section class="slide figure-slide">
-        <h2>$c(L(3n,1)) = 3n-3$ (joint work with Jonathan Spreer)</h2>
+    <section class="slide">
+        <h2>$c(L(3n,1)) = 3n-3$!</h2>
+        <p>The minimal triangulations of $L(3n,1)$ are the <i>minimal layered triangulations</i> (conjecture of Jaco and Rubinstein, 2006).</p>
+        <p>This proof will be on Arxiv in the next couple of weeks.</p>
   
     </section>
-
-
 
 
   <!-- 6. CLOSING. Add further sections before the closing slide as needed. -->
