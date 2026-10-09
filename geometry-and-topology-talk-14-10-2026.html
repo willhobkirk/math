@@ -72,17 +72,29 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
 .title-slide.active { display: flex; }
 .title-slide .author { margin-top: 12px; margin-bottom: 5px; }
 
-/* Two layouts: text + figure, or a full-width heading + two figures. */
-.figure-slide, .two-figures {
+/* Figure layouts: optional full-width header above a two-column body.
+   figure-slide and slide-figure are equivalent names. */
+.figure-slide, .slide-figure, .two-figures {
+  flex-direction: column;
+  gap: 24px;
+}
+.slide.figure-slide.active, .slide.slide-figure.active,
+.slide.two-figures.active { display: flex; }
+.slide-header { flex: 0 0 auto; min-width: 0; }
+.slide-header > :last-child { margin-bottom: 0; }
+.slide-header > .statement { margin: 0; }
+.slide-header h2 { margin-bottom: 20px; }
+.slide-body {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--figure-gap);
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
 }
-.figure-slide { grid-template-rows: minmax(0, 1fr); }
-.two-figures { grid-template-rows: auto minmax(0, 1fr); }
-.slide.figure-slide.active, .slide.two-figures.active { display: grid; }
-.two-figures > h2, .figure-slide > h2 { grid-column: 1 / -1; }
-.figure-slide .text { min-width: 0; min-height: 0; }
-.figure-slide .text > img { display: block; max-width: 100%; height: auto; }
+.slide-body > .text { min-width: 0; min-height: 0; overflow: auto; }
+.slide-body > .text > :last-child { margin-bottom: 0; }
+.slide-body > .text > img { display: block; max-width: 100%; height: auto; }
 
 .slide.centered-slide {
     padding: 66px 86px; /* Equal top/bottom padding */
@@ -108,8 +120,8 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
     }
 }
 
-/* Optional figure heading, with media filling the remaining height. */
-.slide .figure, .two-figures > figure {
+/* Figure captions stay above media, which fills the remaining height. */
+.slide .figure {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,17 +130,16 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
   min-height: 0;
   margin: 0;
 }
-.slide .figure > h3, .two-figures > figure > h3 {
+.slide .figure > h3, .slide .figure > p {
   flex: 0 0 auto;
+  width: 100%;
   margin: 0 0 20px;
   font-size: 30px;
+  line-height: 1.3;
   font-weight: normal;
   text-align: center;
 }
-.slide .figure > img,
-.slide .figure > model-viewer,
-.two-figures > figure > img,
-.two-figures > figure > model-viewer {
+.slide .figure > img, .slide .figure > model-viewer {
   display: block;
   flex: 1 1 0;
   width: 100%;
@@ -136,7 +147,7 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
   min-width: 0;
   min-height: 0;
 }
-.slide .figure > img, .two-figures > figure > img { object-fit: contain; }
+.slide .figure > img { object-fit: contain; }
 
 /* Hide model-viewer's built-in loading bar, not its camera controls. */
 model-viewer::part(default-progress-bar) { display: none; }
@@ -188,7 +199,8 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
   }
   .slide:last-of-type { break-after: auto; page-break-after: auto; }
   .slide.title-slide { display: flex; }
-  .slide.figure-slide, .slide.two-figures { display: grid; }
+  .slide.figure-slide, .slide.slide-figure, .slide.two-figures { display: flex; }
+  .slide-body > .text { overflow: visible; }
   nav, #counter, #math-warning { display: none; }
 }
 </style>
@@ -214,9 +226,8 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 -->
 
     <section class="slide figure-slide">
-
-        <div class="text">
-            <h2>Generalised triangulations of $3$-manifolds</h2>
+<header class="slide-header"><h2>Generalised triangulations of $3$-manifolds</h2>
+            </header><div class="slide-body"><div class="text">
             <p>$\mathcal{T} = (\mathbf{\Delta},\Phi)$</p>
             <p>$\mathbf{\Delta}$ is a disjoint union of linear tetrahedra</p>
             <p>$\Phi$ is a collection of isomorphisms of pairs of triangular faces</p>
@@ -227,24 +238,20 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <img src="pics/solidtorustriangulation.svg" alt="A triangulation of a solid torus">
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-
-        <div class="figure">
+<div class="slide-body"><div class="figure">
             <h3>$\mathcal{T}$</h3>
             <img src="pics/solidtorustriangulation.svg" alt="A triangulation of a solid torus">
         </div>
         <figure class="figure">
             <h3>$|\mathcal{T}|$</h3>
-            <model-viewer
-                src="pics/glbs/one_vertex_solid_torus.glb"
-                camera-controls interaction-prompt="none"
-                alt="A solid torus">
+            <model-viewer src="pics/glbs/one_vertex_solid_torus.glb" camera-controls interaction-prompt="none" alt="A solid torus">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
 
     <section class="slide">
@@ -267,78 +274,61 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     </section>
 
     <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>Lens spaces</h2>
+<header class="slide-header"><h2>Lens spaces</h2>
+            </header><div class="slide-body"><div class="text">
             <p>Orientable $3$-manifolds that admit genus $1$ Heegaard decompositions.</p>
             <p>$L(p,q)$ is obtained by identifying two solid tori such that a meridional curve of one is identified with a $(p,q)$-torus knot on the boundary of the other.</p>
         </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/L_7_2.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/L_7_2.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
     
 
     <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>Bredon and Wood (1969), Rubinstein (1978)</h2>
+<header class="slide-header"><h2>Bredon and Wood (1969), Rubinstein (1978)</h2>
+            </header><div class="slide-body"><div class="text">
             <p>The maximum Euler characteristic of a connected non-orientable surface embedded in $L(2n,1)$ is $2-n$.</p>
         </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/l6_1_2_website.glb"
-                camera-controls interaction-prompt="none"
-                alt="The maximal Euler characteristic connected non-orientable surface that can be embedded in L(6,1)">
+            <model-viewer src="pics/glbs/l6_1_2_website.glb" camera-controls interaction-prompt="none" alt="The maximal Euler characteristic connected non-orientable surface that can be embedded in L(6,1)">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>$c(L(2n,1)) = 2n-3$ for $n>1$</h2>
+<header class="slide-header"><h2>$c(L(2n,1)) = 2n-3$ for $n&gt;1$</h2>
+            </header><div class="slide-body"><div class="text">
             <p>Jaco, Rubinstein, Tillman (2008)</p>
             <p>Proved using canonical non-orientable surfaces realising the non-trivial class of $H_2(L(2n,1);\mathbb{Z}_2) = \mathbb{Z}_2$.</p>
         </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/canonicalnonorientable.glb"
-                camera-controls interaction-prompt="none"
-                alt="Tetrahedron types of a canonical non-orientable surface.">
+            <model-viewer src="pics/glbs/canonicalnonorientable.glb" camera-controls interaction-prompt="none" alt="Tetrahedron types of a canonical non-orientable surface.">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>$\mathbb{Z}_3$-folded surfaces</h2>
-            <p> Recipe: 
+<header class="slide-header"><h2>$\mathbb{Z}_3$-folded surfaces</h2>
+            </header><div class="slide-body"><div class="text">
+            <p>Recipe:</p>
             <ol>
                 <li>Take a compact oriented $2$-manifold $X_{cut}$ and a closed oriented $1$-manifold $\text{Sing}(X)$.</li>
                 <li>Glue $\partial X_{cut}$ onto $\text{Sing}(X)$ by an orientation preserving $3$-sheeted covering map.</li>
             </ol>
-            The resulting space is a $\mathbb{Z}_3$-folded surface $X$.
-            </p>
+            <p>The resulting space is a $\mathbb{Z}_3$-folded surface $X$.</p>
 
         </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/3foldnbhd.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/3foldnbhd.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
 
     <section class="slide">
@@ -351,42 +341,31 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
 
     <section class="slide figure-slide">
-
-        <div class="text">
-            <h2>$X\subset L(3,1)$</h2>
+<header class="slide-header"><h2>$X\subset L(3,1)$</h2>
+            </header><div class="slide-body"><div class="text">
             <p>$\text{Sing}(X)$ is a circle</p>
             <p>$\text{Int}(X)$ is an open disk</p>
         </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/l3_1_norm_1.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-
-        <h2>Some $\mathbb{Z}_3$-folded surfaces are <i>better</i> than others</h2>
+<header class="slide-header"><h2>Some $\mathbb{Z}_3$-folded surfaces are <i>better</i> than others</h2>
         
-        <figure class="figure">
-            <model-viewer
-                src="pics/glbs/l3_1_bubble.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        </header><div class="slide-body"><figure class="figure">
+            <model-viewer src="pics/glbs/l3_1_bubble.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/l3_1_handle.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/l3_1_handle.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide">
         <h2>The $\mathbb{Z}_3$-Thurston norm $||\cdot||_{\mathbb{Z}_3}$</h2>
@@ -396,22 +375,18 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     </section>
 
     <section class="slide figure-slide">
-        
-        <div class="text">
-            <h2>Canonical $\mathbb{Z}_3$-folded surfaces $S_{\varphi}(\mathcal{T})$</h2>
+<header class="slide-header"><h2>Canonical $\mathbb{Z}_3$-folded surfaces $S_{\varphi}(\mathcal{T})$</h2>
+            </header><div class="slide-body"><div class="text">
             <p>Depend only on a triangulation $\mathcal{T}$ and a choice of cellular $\mathbb{Z}_3$ 1-cocycle $\varphi$ representing the dual $H^1(M;\mathbb{Z}_3)$ class.</p>
             <p>When $\mathcal{T}$ has one vertex $S_{\varphi}(\mathcal{T})$ does not separate the ambient space.</p>
         </div>
 
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/canonical3fold.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/canonical3fold.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
-    </section>
+    </div></section>
 
     <section class="slide">
         <h2>The $\chi_3$ function</h2>
@@ -424,108 +399,81 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     </section>
 
     <section class="slide two-figures">
-
-        <div class="statement">
+<header class="slide-header"><div class="statement">
             <p class="label">Theorem:</p>
             <p>$\chi_3(x)=2-n$ for any $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$</p>
         </div>
         
-        <figure class="figure">
+        </header><div class="slide-body"><figure class="figure">
           <h3>$\chi_3(L(6,1)) = 0$</h3>
-            <model-viewer
-                src="pics/glbs/l6_1_3_website.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/l6_1_3_website.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
         <figure class="figure">
           <h3>$\chi_3(L(9,1)) = -1$</h3>
-            <model-viewer
-                src="pics/glbs/l9_1_website.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/l9_1_website.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-
-        <h2>Equivalent genus $1$ Heegaard decompositions</h2>
+<header class="slide-header"><h2>Equivalent genus $1$ Heegaard decompositions</h2>
         
-        <figure class="figure">
-            <model-viewer
-                src="pics/glbs/equivalent_heegaard_before.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        </header><div class="slide-body"><figure class="figure">
+            <model-viewer src="pics/glbs/equivalent_heegaard_before.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/equivalent_heegaard_after.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/equivalent_heegaard_after.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-      <div class="text">
+<div class="slide-body"><div class="text">
         <p>Let $X$ be a $\mathbb{Z}_3$-folded surface of maximal Euler characteristic in $L(3n,1)$ with the property that $L(3n,1)\setminus X$ is connected.</p>
         <p>Choose a genus $1$ Heegaard decomposition of $L(3n,1)$ that is <i>"adapted"</i> to $X$.</p>
       </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/disk_intersection.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/disk_intersection.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-      <div class="text">  
+<div class="slide-body"><div class="text">  
         <p>A Heegaard splitting of $L(3,1)$ that is <i>adapted</i> to a non-separating $\mathbb{Z}_3$-folded surface.</p>
       </div>
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/adapted_l3_1.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/adapted_l3_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-
-        <h2>Meridional intersection patterns</h2>
+<header class="slide-header"><h2>Meridional intersection patterns</h2>
         
-        <figure class="figure">
-            <model-viewer
-                src="pics/glbs/adapted_l3_1_meridional_disk.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        </header><div class="slide-body"><figure class="figure">
+            <model-viewer src="pics/glbs/adapted_l3_1_meridional_disk.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         
         <figure class="figure">
-            <model-viewer
-                src="pics/glbs/adapted_l3_1_meridional_disk_cut.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/adapted_l3_1_meridional_disk_cut.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Meridional intersection patterns</h2>
+<header class="slide-header"><h2>Meridional intersection patterns</h2>
+        </header><div class="slide-body"><div class="text">
         <p>$\mathbb{Z}_3$-folded $1$-manifolds are the $1$-dimensional analogues of $\mathbb{Z}_3$-folded surfaces.</p>
         <p>Meridional intersection patterns are $\mathbb{Z}_3$-folded $1$-manifolds properly embedded in a disk.</p>
         </div>
@@ -533,12 +481,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <img src="pics/meridionaldiskdiagrams.svg" alt="Meridional intersection patterns">
         </figure>
   
-    </section>
+    </div></section>
 
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Disk compressions</h2>
+<header class="slide-header"><h2>Disk compressions</h2>
+        </header><div class="slide-body"><div class="text">
         <p>The compressing disk $D$ is embedded such that:</p> 
         <ul>
             <li>$D\cap X = \partial D$</li>
@@ -546,49 +494,40 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </ul>
         </div>
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/0compression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/0compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
-    </section>
+    </div></section>
     
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Incompressibility</h2>
+<header class="slide-header"><h2>Incompressibility</h2>
+        </header><div class="slide-body"><div class="text">
         <p>If $X$ is a non-separating $\mathbb{Z}_3$-folded surface of maximal Euler characteristic it follows that $\partial D$ bounds a disk in $\text{Int}(X)$</p>
         </div>
 
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/incompressibility.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/incompressibility.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2><i>Reduced</i> disk compressions</h2>
+<header class="slide-header"><h2><i>Reduced</i> disk compressions</h2>
+        </header><div class="slide-body"><div class="text">
         <p>A disk compression followed by deletion of the separating $2$-sphere created.</p>
         </div>
-        <div class = "figure">
-            <model-viewer
-                src="pics/glbs/reducedcompression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        <div class="figure">
+            <model-viewer src="pics/glbs/reducedcompression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer> 
 
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>$2$-compressions</h2>
+<header class="slide-header"><h2>$2$-compressions</h2>
+        </header><div class="slide-body"><div class="text">
         <p>The compressing disk $D$ is embedded such that:</p> 
         <ul>
             <li>$D\cap X = \partial D$</li>
@@ -597,51 +536,42 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </ul>
         </div>
 
-        <div class = "figure">
-            <model-viewer
-                src="pics/glbs/2compression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        <div class="figure">
+            <model-viewer src="pics/glbs/2compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>$2$-incompressibility</h2>
+<header class="slide-header"><h2>$2$-incompressibility</h2>
+        </header><div class="slide-body"><div class="text">
         <p>If $X$ is a non-separating $\mathbb{Z}_3$-folded surface of maximal Euler characteristic it follows that there exists an interval $I$ in $\text{Sing}(X)$ such that the theta graph $I \cup \partial D$ bounds a pair of disks in $\text{Int}(X)$.</p>
         </div>
 
-        <div class = "figure">
-            <model-viewer
-                src="pics/glbs/2incompressibility.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        <div class="figure">
+            <model-viewer src="pics/glbs/2incompressibility.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Reduced $2$-compression surgeries</h2>
+<header class="slide-header"><h2>Reduced $2$-compression surgeries</h2>
+        </header><div class="slide-body"><div class="text">
         <p>A $2$-compression followed by <i>deletion</i> of the <i>bubble</i> created.</p>
         <p>Preserves the Euler characteristic and the property of not separating the ambient space.</p>
         </div>
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/reduced2compression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/reduced2compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>$4$-compressions</h2>
+<header class="slide-header"><h2>$4$-compressions</h2>
+        </header><div class="slide-body"><div class="text">
         <p>The compressing disk $D$ is embedded such that:</p> 
         <ul>
             <li>$D\cap X = \partial D$</li>
@@ -650,18 +580,15 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </ul>
         </div>
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/4compression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/4compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Reduced $4$-compressions</h2>
+<header class="slide-header"><h2>Reduced $4$-compressions</h2>
+        </header><div class="slide-body"><div class="text">
         <ol>
             <li>Perform a $4$-compression.</li>
             <li>If this results in a $\mathbb{Z}_3$-folded surface that separates the ambient space, a non-separating $\mathbb{Z}_3$-folded surface of the same Euler characteristic can be recovered by removing some components of the interior.</li>
@@ -669,18 +596,15 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/reduced4compression.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/reduced4compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
-        <h2>Induced operations on meridional intersection patterns</h2>
+<header class="slide-header"><h2>Induced operations on meridional intersection patterns</h2>
+        </header><div class="slide-body"><div class="text">
         <p>We use the reduced compression surgeries to eliminate all <i>bigons</i>, <i>quads</i> and simple closed curves from the meridional intersection pattern.</p>
         </div>
 
@@ -689,12 +613,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-        <p>The resulting meridional intersection pattern must admit a subcomplex that looks like one of the following:</p>
+<header class="slide-header"><p>The resulting meridional intersection pattern must admit a subcomplex that looks like one of the following:</p>
         
-        <div class="figure">
+        </header><div class="slide-body"><div class="figure">
             <img src="pics/intervalbetterintersectionarcs.svg" alt="disk reduction">
         </div>
 
@@ -702,140 +626,125 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <img src="pics/b3tob3interval.svg" alt="disk reduction">
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>These subcomplexes allow us to reduce the number of meridional disks.</p>
 
         </div>
         
         
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/meridionaldiskreductionL31.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/meridionaldiskreductionL31.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>Repeat this process until we have only a single meridional disk in the intersection with the first solid torus.</p>
 
         </div>
         
         
         <div class="figure">
-            <model-viewer
-                src="pics/glbs/l3_1_norm_1.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
   
-    </section>
+    </div></section>
 
         <section class="slide two-figures">
-        <h2>Snake/finger moves</h2>
+<header class="slide-header"><h2>Snake/finger moves</h2>
         <p>Meridional intersection patterns can be further manipulated by performing ambient isotopies to the $\mathbb{Z}_3$-folded surface.</p>
 
-        <div class = "figure">
-            <model-viewer
-                src="pics/glbs/cylinder_snake_glb.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        </header><div class="slide-body"><div class="figure">
+            <model-viewer src="pics/glbs/cylinder_snake_glb.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
-        <div class = "figure">
-            <model-viewer
-                src="pics/glbs/cylinder_snake_after_glb.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+        <div class="figure">
+            <model-viewer src="pics/glbs/cylinder_snake_after_glb.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
-    </section>
+    </div></section>
 
-    <section class = "slide figure-slide">
-        <div class="text">
+    <section class="slide figure-slide">
+<div class="slide-body"><div class="text">
             <p>We simplify meridional intersection patterns further by combining these snake/finger moves with the reduced $4$-compression surgery.</p>
         </div>
 
-        <div class = "figure">
+        <div class="figure">
             <img src="pics/snakemove.svg" alt="disk reduction">
         </div>
 
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p><i>Minimal</i> meridional intersection patterns always have at least one <i>boundary tripod</i>.</p>
         </div>
 
         <div class="figure">
             <img src="pics/boundarytripod.svg" alt="disk reduction">
         </div>
-    </section>
+    </div></section>
 
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>Cut the second solid torus along the meridional intersection disk. This gives us a $\mathbb{Z}_3$-folded surface with boundary properly embedded in a $3$-ball.</p>
         </div>
 
         <div class="figure">
             <img src="pics/3ball.svg" alt="disk reduction">
         </div>
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>Boundary tripods imply the existence of bigons in the boundary pattern.</p>
         </div>
 
         <div class="figure">
             <img src="pics/boundarytripodbigon.svg" alt="disk reduction">
         </div>
-    </section>
+    </div></section>
 
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>A cut and glue operation using this bigon and reduced $2$-compression yields a non-separating $\mathbb{Z}_3$-folded surface in $L(3(n-1),1)$ from one in $L(3n,1)$.</p>
-            <p>It follows that $\chi_3(L(3n,1))\leq \chi_3(L(3(n-1),1))-1$ for all $n>1$</p>
+            <p>It follows that $\chi_3(L(3n,1))\leq \chi_3(L(3(n-1),1))-1$ for all $n&gt;1$</p>
             <p>We already know that $\chi_3(L(3,1))=1$ so $\chi_3(L(3n,1))\leq 2-n$.
 
-        </div>
+        </p></div>
 
         <div class="figure">
             <img src="pics/newD_Yboundarypattern.svg" alt="disk reduction">
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide two-figures">
-        <h2>$\chi_3(L(3n,1))\geq 2-n$ by example.</h2>
-        <div class="figure">
+    <header class="slide-header"><h2>$\chi_3(L(3n,1))\geq 2-n$ by example.</h2>
+        </header><div class="slide-body"><div class="figure">
             <p>A family of particularly nice meridional intersection patterns.</p>
             <img src="pics/nicemeridionalint.svg" alt="disk reduction">
         </div>
 
         <div class="figure">
             <p>A family of non-separating $\mathbb{Z}_3$-folded surfaces.</p>
-            <model-viewer
-                src="pics/glbs/nice3folded.glb"
-                camera-controls interaction-prompt="none"
-                alt="">
+            <model-viewer src="pics/glbs/nice3folded.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
-    </section>
+    </div></section>
 
     <section class="slide centered-slide">
         <p>Hence $\chi_3(L(3n,1))=2-n$!</p>
@@ -847,30 +756,30 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>Fix a minimal one-vertex triangulation of $L(3n,1)$ and let $X$ be a canonical $\mathbb{Z}_3$-folded surface.</p>
             <p>There are four ways $X$ can intersect a tetrahedron.</p>
             <p>We can partition the edges into $\mathfrak{e}$ <i>even</i> edges and $\mathfrak{o}$ <i>odd</i> edges.</p>
         </div>
 
-        <div class = "figure">
+        <div class="figure">
             <img src="pics/p3tetrahedrontypes.svg" alt="disk reduction">
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide figure-slide">
-        <div class="text">
+<div class="slide-body"><div class="text">
             <p>$X$ has the same Euler characteristic as its complement.</p>
             <p>The complement of $X$ deformation retracts onto the subcomplex spanned by the <i>even</i> edges.</p>
-            <p>Hence $\chi(X) = 1 - \mathfrak{e} + \frac{B+4C}{2} - C</p>
+            <p>Hence $\chi(X) = 1 - \mathfrak{e} + \frac{B+4C}{2} - C$</p>
         </div>
 
-        <div class = "figure">
+        <div class="figure">
             <img src="pics/deformationretraction.svg" alt="disk reduction">
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide">
         <h2>$\mathfrak{e} \geq n-1$</h2>
@@ -880,18 +789,18 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     </section>
 
     <section class="slide figure-slide">
-        <div class="text">
-            <h2>$\mathfrak{o} \geq 2$ if $n>1$</h2>
-            <p>$\mathfrak{o}> 0$ since $X$ is non-empty.</p>
+<header class="slide-header"><h2>$\mathfrak{o} \geq 2$ if $n&gt;1$</h2>
+            </header><div class="slide-body"><div class="text">
+            <p>$\mathfrak{o}&gt; 0$ since $X$ is non-empty.</p>
             <p>$\mathfrak{o}= 1$ implies that a $\mathbb{Z}_3$-crosscap embeds in $L(3n,1)$.</p>
-            <p>But $\chi_3(L(3n,1)) = 2-n < 1$! </p>
+            <p>But $\chi_3(L(3n,1)) = 2-n &lt; 1$! </p>
         </div>
 
         <div class="figure">
             <img src="pics/Z3crosscap.svg" alt="disk reduction">
         </div>
   
-    </section>
+    </div></section>
 
     <section class="slide">
         <h2>$c(L(3n,1)) \geq n$</h2>

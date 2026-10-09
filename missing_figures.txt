@@ -10,12 +10,4 @@ reduced4compression.glb
 
 meridionaldiskreductionL31.glb
 
-boundarytripod.svg
-
-nicemeridionalint.svg
-
 nice3folded.glb
-
-deformationretraction.svg
-
-Z3crosscap.svg
