@@ -10,4 +10,6 @@ reduced4compression.glb
 
 meridionaldiskreductionL31.glb
 
+meridionaldiskreductionL31_cut.glb
+
 nice3folded.glb
