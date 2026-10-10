@@ -221,6 +221,14 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 .slide-header h2 { margin-bottom: .465em; }
 .slide-header > :last-child, .text > :last-child { margin-bottom: 0; }
 .slide .figure > p, .slide .figure > h3 { margin-bottom: .667em; }
+
+/* Two full-width figures stacked in equal-height rows beneath the header. */
+.slide.stacked-figures .slide-body {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  column-gap: 0;
+  row-gap: 16px;
+}
 </style>
 </head>
 <body>
@@ -755,30 +763,38 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
   
     </div></section>
 
-    <section class="slide two-figures">
-    <header class="slide-header"><h2>$\chi_3(L(3n,1))\geq 2-n$ by example.</h2>
-        </header><div class="slide-body"><div class="figure">
-            <p>A family of particularly nice meridional intersection patterns.</p>
-            <img src="pics/nicemeridionalint.svg" alt="disk reduction">
-        </div>
-
-        <div class="figure">
-            <p>A family of non-separating $\mathbb{Z}_3$-folded surfaces.</p>
-            <model-viewer disable-pan src="pics/glbs/nice3folded_ball.glb" camera-controls interaction-prompt="none" alt="" orientation="0deg 0deg 180deg">
-            </model-viewer>
-        </div>
-
-    </div></section>
-
-    <section class="slide figure-slide full-width-figure">
-        <header class="slide-header"><h2>Hence $\chi_3(L(3n,1))=2-n$.</h2>
-        </header>
+    <section class="slide slide-figure">
+        
         <div class="slide-body">
+            
+            <div class="text">
+                <p>We will show that $\chi_3(L(3n,1))\geq 2-n$ by example.</p>
+                <p>Here is a family of particularly nice meridional intersection patterns.</p>
+            </div>
 
-        <div class="figure">
-            <model-viewer disable-pan src="pics/glbs/nice3folded.glb" camera-controls interaction-prompt="none" alt="" orientation="0deg 0deg 180deg">
-            </model-viewer>
+            <div class="figure">
+                
+                <img src="pics/nicemeridionalint.svg" alt="disk reduction">
         </div>
+    </div>
+    </section>
+
+    
+
+    <section class="slide figure-slide stacked-figures">
+
+        <header class="slide-header"><p>A family of non-separating $\mathbb{Z}_3$-folded surfaces with these meridional intersection patterns.</p>
+        </header>
+
+        <div class="slide-body">
+            <div class="figure">
+                <model-viewer disable-pan src="pics/glbs/nice3folded_ball.glb" camera-controls interaction-prompt="none" alt="" orientation="0deg 0deg 180deg">
+                </model-viewer>
+            </div>
+            <div class="figure">
+                <model-viewer disable-pan src="pics/glbs/nice3folded.glb" camera-controls interaction-prompt="none" alt="" orientation="0deg 0deg 180deg">
+                </model-viewer>
+            </div>
   
         </div>
     </section>
