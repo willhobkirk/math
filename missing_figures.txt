@@ -8,4 +8,6 @@ reduced2compression.glb
 
 reduced4compression.glb
 
+nice3folded_ball.glb
+
 nice3folded.glb
