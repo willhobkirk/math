@@ -35,14 +35,14 @@ body {
   font-family: Georgia, 'Times New Roman', serif;
 }
 h1, h2 { font-weight: normal; line-height: 1.18; margin: 0 0 38px; }
-h1 { font-size: 58px; max-width: 950px; }
-h2 { font-size: 43px; }
+h1 { font-size: 1.933333em; max-width: 950px; }
+h2 { font-size: 1.433333em; }
 p { margin: 0 0 24px; }
 ul, ol { margin: 22px 0; padding-left: 1.25em; }
 li { margin: 14px 0; padding-left: 6px; }
 a { color: inherit; text-underline-offset: 4px; }
 code { font-size: .8em; }
-.meta { color: var(--muted); font-size: 24px; }
+.meta { color: var(--muted); font-size: 0.800000em; }
 .statement { margin: 32px 0; }
 .statement p:first-child { margin-bottom: 14px; }
 .statement .label { font-weight: bold; }
@@ -63,8 +63,8 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
   position: absolute;
   inset: 0;
   padding: 66px 86px 72px;
-  overflow: auto;
-  font-size: var(--body-size);
+  overflow: hidden;
+  font-size: calc(var(--body-size) * var(--text-scale, 1));
   line-height: 1.5;
 }
 .slide.active { display: block; }
@@ -92,7 +92,7 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
   min-width: 0;
   min-height: 0;
 }
-.slide-body > .text { min-width: 0; min-height: 0; overflow: auto; }
+.slide-body > .text { min-width: 0; min-height: 0; overflow: hidden; }
 .slide-body > .text > :last-child { margin-bottom: 0; }
 .slide-body > .text > img { display: block; max-width: 100%; height: auto; }
 
@@ -109,7 +109,7 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
 
 .centered-slide > p {
     margin: 0;
-    font-size: 72px;
+    font-size: 2.400000em;
     line-height: 1.2;
 }
 
@@ -134,7 +134,7 @@ mjx-container[display="true"] { margin: 1em 0 !important; }
   flex: 0 0 auto;
   width: 100%;
   margin: 0 0 20px;
-  font-size: 30px;
+  font-size: 1.000000em;
   line-height: 1.3;
   font-weight: normal;
   text-align: center;
@@ -203,6 +203,24 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
   .slide-body > .text { overflow: visible; }
   nav, #counter, #math-warning { display: none; }
 }
+
+/* Keep the scaled canvas inside the viewport, without scrollbars. */
+html, body { width: 100%; height: 100%; overflow: hidden; }
+.slide { --text-scale: 1; overflow: hidden; }
+.slide.full-width-figure .slide-body { grid-template-columns: minmax(0, 1fr); }
+.slide-header { overflow: hidden; }
+.slide .figure { overflow: hidden; }
+.slide .figure > p, .slide .figure > h3 { font-size: 1em; }
+.slide-fit-content { width: 100%; min-width: 0; }
+.slide p { margin-bottom: .8em; }
+.slide h1 { margin-bottom: .655em; }
+.slide h2 { margin-bottom: .884em; }
+.slide ul, .slide ol { margin-top: .733em; margin-bottom: .733em; }
+.slide li { margin-top: .467em; margin-bottom: .467em; }
+.slide .statement { margin-top: 1.067em; margin-bottom: 1.067em; }
+.slide-header h2 { margin-bottom: .465em; }
+.slide-header > :last-child, .text > :last-child { margin-bottom: 0; }
+.slide .figure > p, .slide .figure > h3 { margin-bottom: .667em; }
 </style>
 </head>
 <body>
@@ -247,7 +265,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
         <figure class="figure">
             <h3>$|\mathcal{T}|$</h3>
-            <model-viewer src="pics/glbs/one_vertex_solid_torus.glb" camera-controls interaction-prompt="none" alt="A solid torus">
+            <model-viewer disable-pan src="pics/glbs/one_vertex_solid_torus.glb" camera-controls interaction-prompt="none" alt="A solid torus">
             </model-viewer>
         </figure>
 
@@ -280,7 +298,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <p>$L(p,q)$ is obtained by identifying two solid tori such that a meridional curve of one is identified with a $(p,q)$-torus knot on the boundary of the other.</p>
         </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/L_7_2.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/L_7_2.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -293,7 +311,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <p>The maximum Euler characteristic of a connected non-orientable surface embedded in $L(2n,1)$ is $2-n$.</p>
         </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/l6_1_2_website.glb" camera-controls interaction-prompt="none" alt="The maximal Euler characteristic connected non-orientable surface that can be embedded in L(6,1)">
+            <model-viewer disable-pan src="pics/glbs/l6_1_2_website.glb" camera-controls interaction-prompt="none" alt="The maximal Euler characteristic connected non-orientable surface that can be embedded in L(6,1)">
             </model-viewer>
         </figure>
 
@@ -306,7 +324,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <p>Proved using canonical non-orientable surfaces realising the non-trivial class of $H_2(L(2n,1);\mathbb{Z}_2) = \mathbb{Z}_2$.</p>
         </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/canonicalnonorientable.glb" camera-controls interaction-prompt="none" alt="Tetrahedron types of a canonical non-orientable surface.">
+            <model-viewer disable-pan src="pics/glbs/canonicalnonorientable.glb" camera-controls interaction-prompt="none" alt="Tetrahedron types of a canonical non-orientable surface.">
             </model-viewer>
         </figure>
 
@@ -324,7 +342,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/3foldnbhd.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/3foldnbhd.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -347,7 +365,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
             <p>$\text{Int}(X)$ is an open disk</p>
         </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -357,11 +375,11 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 <header class="slide-header"><h2>Some $\mathbb{Z}_3$-folded surfaces are <i>better</i> than others</h2>
         
         </header><div class="slide-body"><figure class="figure">
-            <model-viewer src="pics/glbs/l3_1_bubble.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l3_1_bubble.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         <figure class="figure">
-            <model-viewer src="pics/glbs/l3_1_handle.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l3_1_handle.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -382,7 +400,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <figure class="figure">
-            <model-viewer src="pics/glbs/canonical3fold.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/canonical3fold.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
@@ -406,13 +424,13 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         
         </header><div class="slide-body"><figure class="figure">
           <h3>$\chi_3(L(6,1)) = 0$</h3>
-            <model-viewer src="pics/glbs/l6_1_3_website.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l6_1_3_website.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
         <figure class="figure">
           <h3>$\chi_3(L(9,1)) = -1$</h3>
-            <model-viewer src="pics/glbs/l9_1_website.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l9_1_website.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -422,12 +440,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 <header class="slide-header"><h2>Equivalent genus $1$ Heegaard decompositions</h2>
         
         </header><div class="slide-body"><figure class="figure">
-            <model-viewer src="pics/glbs/equivalent_heegaard_before.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/equivalent_heegaard_before.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         
         <figure class="figure">
-            <model-viewer src="pics/glbs/equivalent_heegaard_after.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/equivalent_heegaard_after.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -439,18 +457,18 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p>Choose a genus $1$ Heegaard decomposition of $L(3n,1)$ that is <i>"adapted"</i> to $X$.</p>
       </div>
         <figure class="figure">
-            <model-viewer src="pics/glbs/disk_intersection.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/disk_intersection.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
     </div></section>
 
-    <section class="slide figure-slide">
-<div class="slide-body"><div class="text">  
+    <section class="slide figure-slide full-width-figure">
+<header class="slide-header">  
         <p>A Heegaard splitting of $L(3,1)$ that is <i>adapted</i> to a non-separating $\mathbb{Z}_3$-folded surface.</p>
-      </div>
+      </header><div class="slide-body">
         <figure class="figure">
-            <model-viewer src="pics/glbs/adapted_l3_1.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/adapted_l3_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
   
@@ -460,12 +478,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 <header class="slide-header"><h2>Meridional intersection patterns</h2>
         
         </header><div class="slide-body"><figure class="figure">
-            <model-viewer src="pics/glbs/adapted_l3_1_meridional_disk.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/adapted_l3_1_meridional_disk.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
         
         <figure class="figure">
-            <model-viewer src="pics/glbs/adapted_l3_1_meridional_disk_cut.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/adapted_l3_1_meridional_disk_cut.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </figure>
 
@@ -494,7 +512,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </ul>
         </div>
         <div class="figure">
-            <model-viewer src="pics/glbs/0compression.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/0compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
     </div></section>
@@ -506,7 +524,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/incompressibility.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/incompressibility.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -518,7 +536,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p>A disk compression followed by deletion of the separating $2$-sphere created.</p>
         </div>
         <div class="figure">
-            <model-viewer src="pics/glbs/reducedcompression.glb" camera-controls orientation="180deg 0deg 0deg" interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/reducedcompression.glb" camera-controls orientation="180deg 0deg 0deg" interaction-prompt="none" alt="">
             </model-viewer> 
 
         </div>
@@ -537,7 +555,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/2compression.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/2compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -550,7 +568,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/2incompressibility.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/2incompressibility.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -563,7 +581,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p>Preserves the Euler characteristic and the property of not separating the ambient space.</p>
         </div>
         <div class="figure">
-            <model-viewer src="pics/glbs/reduced2compression.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/reduced2compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -580,7 +598,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </ul>
         </div>
         <div class="figure">
-            <model-viewer src="pics/glbs/4compression.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/4compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -596,7 +614,7 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/reduced4compression.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/reduced4compression.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
   
@@ -637,27 +655,27 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <div class="slide-body">
         
         <div class="figure">
-            <model-viewer src="pics/glbs/meridionaldiskreductionL31_cut.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/meridionaldiskreductionL31_cut.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/meridionaldiskreductionL31.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/meridionaldiskreductionL31.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
   
     </div></section>
 
-    <section class="slide figure-slide">
-<div class="slide-body"><div class="text">
+    <section class="slide figure-slide full-width-figure">
+<header class="slide-header">
             <p>Repeat this process until we have only a single meridional disk in the intersection with the first solid torus.</p>
 
-        </div>
+        </header><div class="slide-body">
         
         
         <div class="figure">
-            <model-viewer src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/l3_1_norm_1.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
@@ -669,12 +687,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
         <p>Meridional intersection patterns can be further manipulated by performing ambient isotopies to the $\mathbb{Z}_3$-folded surface.</p>
 
         </header><div class="slide-body"><div class="figure">
-            <model-viewer src="pics/glbs/cylinder_snake_glb.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/cylinder_snake_glb.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
         <div class="figure">
-            <model-viewer src="pics/glbs/cylinder_snake_after_glb.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/cylinder_snake_after_glb.glb" camera-controls interaction-prompt="none" alt="">
             </model-viewer>
         </div>
 
@@ -746,19 +764,19 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
 
         <div class="figure">
             <p>A family of non-separating $\mathbb{Z}_3$-folded surfaces.</p>
-            <model-viewer src="pics/glbs/nice3folded_ball.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/nice3folded_ball.glb" camera-controls interaction-prompt="none" alt="" orientation="180deg 0deg 0deg">
             </model-viewer>
         </div>
 
     </div></section>
 
-    <section class="slide figure-slide">
+    <section class="slide figure-slide full-width-figure">
         <header class="slide-header"><h2>Hence $\chi_3(L(3n,1))=2-n$.</h2>
         </header>
         <div class="slide-body">
 
         <div class="figure">
-            <model-viewer src="pics/glbs/nice3folded.glb" camera-controls interaction-prompt="none" alt="">
+            <model-viewer disable-pan src="pics/glbs/nice3folded.glb" camera-controls interaction-prompt="none" alt="" orientation="180deg 0deg 0deg">
             </model-viewer>
         </div>
   
@@ -855,6 +873,54 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
   const previous = document.getElementById('previous');
   const next = document.getElementById('next');
   let current = 0;
+
+  // Fit text after layout, including after MathJax finishes typesetting.
+  slides.forEach(slide => {
+    if (!slide.querySelector('.slide-body')) {
+      const content = document.createElement('div');
+      content.className = 'slide-fit-content';
+      while (slide.firstChild) content.appendChild(slide.firstChild);
+      slide.appendChild(content);
+    }
+  });
+  function fitSlide(slide) {
+    slide.style.setProperty('--text-scale', 1);
+    function fits() {
+      const body = slide.querySelector('.slide-body');
+      if (body && body.clientHeight < 180) return false;
+      const padding = getComputedStyle(slide);
+      const available = slide.clientHeight - parseFloat(padding.paddingTop) - parseFloat(padding.paddingBottom);
+      const content = slide.querySelector('.slide-fit-content');
+      if (content && (content.scrollHeight > available + 1 || content.scrollWidth > content.clientWidth + 1)) return false;
+      for (const text of slide.querySelectorAll('.text, .slide-header')) {
+        if (text.scrollWidth > text.clientWidth + 1 || text.scrollHeight > text.clientHeight + 1) return false;
+      }
+      for (const figure of slide.querySelectorAll('.figure')) {
+        if (figure.scrollHeight > figure.clientHeight + 1 || figure.scrollWidth > figure.clientWidth + 1) return false;
+      }
+      return slide.scrollHeight <= slide.clientHeight + 1;
+    }
+    if (fits()) return;
+    let low = 0.05, high = 1;
+    for (let i = 0; i < 15; i++) {
+      const scale = (low + high) / 2;
+      slide.style.setProperty('--text-scale', scale);
+      if (fits()) low = scale; else high = scale;
+    }
+    slide.style.setProperty('--text-scale', low);
+  }
+  let fitFrame;
+  function scheduleFit() {
+    cancelAnimationFrame(fitFrame);
+    fitFrame = requestAnimationFrame(() => fitSlide(slides[current]));
+  }
+  window.addEventListener('load', () => {
+    scheduleFit();
+    if (window.MathJax && MathJax.startup) MathJax.startup.promise.then(scheduleFit);
+  });
+  document.fonts.ready.then(scheduleFit);
+  document.querySelectorAll('img, model-viewer').forEach(media => media.addEventListener('load', scheduleFit));
+
   function fromHash() {
     const match = location.hash.match(/^#(\d+)$/);
     return match ? Number(match[1]) - 1 : 0;
@@ -866,10 +932,12 @@ button:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
     previous.disabled = current === 0;
     next.disabled = current === slides.length - 1;
     history.replaceState(null, '', '#' + (current + 1));
+    scheduleFit();
   }
   function resize() {
-    document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1200, innerHeight / 675));
+    document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1200, Math.max(1, innerHeight - 48) / 675));
   }
+  window.addEventListener('resize', scheduleFit);
   async function fullscreen() {
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
