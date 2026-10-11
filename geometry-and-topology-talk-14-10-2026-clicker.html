@@ -230,7 +230,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
   row-gap: 16px;
 }
 
-/* A subtle indicator for paragraphs still waiting to be revealed. */
+/* A subtle indicator for text still waiting to be revealed. */
 .slide.has-pending-paragraphs::after {
   content: "";
   position: absolute;
@@ -243,9 +243,9 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
   pointer-events: none;
 }
 @media print { .slide.has-pending-paragraphs::after { display: none; } }
-/* Reserve paragraph space so reveals never shift the slide layout. */
-.slide p.paragraph-pending { visibility: hidden; }
-@media print { .slide p.paragraph-pending { visibility: visible; } }
+/* Reserve text space so reveals never shift the slide layout. */
+.slide .paragraph-pending { visibility: hidden; }
+@media print { .slide .paragraph-pending { visibility: visible; } }
 </style>
 </head>
 <body>
@@ -413,7 +413,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
     <section class="slide">
         <h2>The $\mathbb{Z}_3$-Thurston norm $||\cdot||_{\mathbb{Z}_3}$</h2>
         <p>A function on homology that characterises how <i>complicated</i> the set of realisations of a $H_2(\mathbb{Z}_3)$ class is.</p>
-        <p>\[ ||x||_{\mathbb{Z}_3} := \max_{[X]=x} \sum_{X_0\in \pi_0(\text{Int}(X))} \max(-\chi(X_0),0)\]</p>
+        <p>\[\chi_-(X):= \sum_{X_0\in \pi_0(\text{Int}(X))} \max(-\chi(X_0),0)\]</p>
+        <p>\[ ||x||_{\mathbb{Z}_3} := \max_{[X]=x} \chi_-(X)\]</p>
   
     </section>
 
@@ -953,8 +954,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
   document.fonts.ready.then(scheduleFit);
   document.querySelectorAll('img, model-viewer').forEach(media => media.addEventListener('load', scheduleFit));
 
-  // Reveal paragraphs in document order, keeping their original layout space.
-  const paragraphSteps = slides.map(slide => Array.from(slide.querySelectorAll('p')));
+  // Reveal paragraphs and list items in document order, keeping their original layout space.
+  const paragraphSteps = slides.map(slide => Array.from(slide.querySelectorAll('p, li')));
   function updateRevealIndicator(slideIndex) {
     slides[slideIndex].classList.toggle('has-pending-paragraphs',
       paragraphSteps[slideIndex].some(p => p.classList.contains('paragraph-pending')));
