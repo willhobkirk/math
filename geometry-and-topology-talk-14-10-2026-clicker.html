@@ -230,6 +230,19 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
   row-gap: 16px;
 }
 
+/* A subtle indicator for paragraphs still waiting to be revealed. */
+.slide.has-pending-paragraphs::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d92323;
+  pointer-events: none;
+}
+@media print { .slide.has-pending-paragraphs::after { display: none; } }
 /* Reserve paragraph space so reveals never shift the slide layout. */
 .slide p.paragraph-pending { visibility: hidden; }
 @media print { .slide p.paragraph-pending { visibility: visible; } }
@@ -942,12 +955,17 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 
   // Reveal paragraphs in document order, keeping their original layout space.
   const paragraphSteps = slides.map(slide => Array.from(slide.querySelectorAll('p')));
+  function updateRevealIndicator(slideIndex) {
+    slides[slideIndex].classList.toggle('has-pending-paragraphs',
+      paragraphSteps[slideIndex].some(p => p.classList.contains('paragraph-pending')));
+  }
   function resetParagraphs(slideIndex) {
     paragraphSteps[slideIndex].forEach((paragraph, i) => {
       paragraph.classList.toggle('paragraph-pending', i > 0);
       if (i > 0) paragraph.setAttribute('aria-hidden', 'true');
       else paragraph.removeAttribute('aria-hidden');
     });
+    updateRevealIndicator(slideIndex);
   }
   slides.forEach((slide, i) => {
     resetParagraphs(i);
@@ -959,6 +977,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
       if (paragraph) {
         paragraph.classList.remove('paragraph-pending');
         paragraph.removeAttribute('aria-hidden');
+        updateRevealIndicator(i);
       }
     });
   });
