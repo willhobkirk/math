@@ -559,10 +559,10 @@
       </section>
 
       <section class="slide">
-        <h2>$\mathbb{Z}_3$-folded surfaces represent $H_2(\mathbb{Z}_3)$</h2>
-        <p>$X$ has a fundamental class $[X] \in H_2(\mathbb{Z}_3)$ determined by the fundamental class $[X_{cut}]\in H_2(X_{cut},\partial X_{cut};\mathbb{Z})$.</p>
+        <h2>$\mathbb{Z}_3$-folded surfaces represent $H_2(M;\mathbb{Z}_3) classes$</h2>
+        <p>$X$ has a fundamental class $[X] \in H_2(X;\mathbb{Z}_3)$ determined by the orientation of $\text{Int}(X)$.</p>
         <p>If $X\subset M$ we say $X$ <i>represents</i> the image of $[X]$ in $H_2(M;\mathbb{Z}_3)$.</p>
-        <p>If $M$ is a compact orientable $3$-manifold then every class in $H_2(M;\mathbb{Z}_3)$ is represented by an embedded $\mathbb{Z}_3$-folded surface.</p>
+        <p>Every class in $H_2(M;\mathbb{Z}_3)$ can be represented by an embedded $\mathbb{Z}_3$-folded surface for compact orientable $3$-manifolds $M$.</p>
       </section>
 
       <section class="slide figure-slide">
@@ -610,8 +610,8 @@
         </header>
         <div class="slide-body">
           <div class="text">
-            <p>Depend only on a triangulation $\mathcal{T}$ and a choice of cellular $\mathbb{Z}_3$ 1-cocycle $\varphi$ representing the dual $H^1(M;\mathbb{Z}_3)$ class.</p>
-            <p>When $\mathcal{T}$ has one vertex $S_{\varphi}(\mathcal{T})$ does not separate the ambient space.</p>
+            <p>Depend only on a one vertex triangulation $\mathcal{T}$ and a $H_2(M;\mathbb{Z}_3)$.</p>
+            <p>$S_{\varphi}(\mathcal{T})$ does not separate the ambient space.</p>
           </div>
 
           <figure class="figure">
@@ -654,7 +654,8 @@
       </section>
 
       <section class="slide centered-slide">
-        <p>Let $X$ be a non-separating $\mathbb{Z}_3$-folded surface embedded in $L(3n,1)$ of maximal Euler characteristic.</p>
+        <h2>Standing assumption:</h2>
+        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">Let $X$ be a non-separating $\mathbb{Z}_3$-folded surface embedded in $L(3n,1)$ of maximal Euler characteristic for some $n\in \mathbb{Z}^{>0}$.</p>
 
       </section>
 
@@ -1236,12 +1237,24 @@
           );
         }
         function resetParagraphs(slideIndex) {
+          const revealAll = slides[slideIndex].classList.contains('title-slide');
           paragraphSteps[slideIndex].forEach((paragraph, i) => {
-            paragraph.classList.toggle('paragraph-pending', i > 0);
+            paragraph.classList.toggle('paragraph-pending', !revealAll && i > 0);
             paragraph.removeAttribute('aria-hidden');
           });
           updateRevealIndicator(slideIndex);
         }
+        function revealNextParagraph(slideIndex) {
+          const paragraph = paragraphSteps[slideIndex].find((p) =>
+            p.classList.contains('paragraph-pending'),
+          );
+          if (!paragraph) return false;
+          paragraph.classList.remove('paragraph-pending');
+          paragraph.removeAttribute('aria-hidden');
+          updateRevealIndicator(slideIndex);
+          return true;
+        }
+
         slides.forEach((slide, i) => {
           resetParagraphs(i);
           slide.addEventListener('click', (event) => {
@@ -1254,14 +1267,7 @@
               window.getSelection()?.toString()
             )
               return;
-            const paragraph = paragraphSteps[i].find((p) =>
-              p.classList.contains('paragraph-pending'),
-            );
-            if (paragraph) {
-              paragraph.classList.remove('paragraph-pending');
-              paragraph.removeAttribute('aria-hidden');
-              updateRevealIndicator(i);
-            }
+            revealNextParagraph(i);
           });
         });
 
@@ -1321,7 +1327,8 @@
               show(current - 1);
               break;
             case ' ':
-              show(current + (event.shiftKey ? -1 : 1));
+              if (event.shiftKey) show(current - 1);
+              else if (!revealNextParagraph(current)) show(current + 1);
               break;
             case 'Home':
               show(0);
