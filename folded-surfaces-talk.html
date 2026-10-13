@@ -1017,8 +1017,19 @@
         <div class="slide-body">
           <div class="text">
             <p>Convert $X \subset L(3n,1)$ into $Y \subset L(3(n-1),1)$ constructively.</p>
-            <p>Implies that $\chi_3(L(3n,1))+1 = \chi(X) + 1 = \chi(Y) \leq \chi_3(L(3(n-1),1))$.</p>
-            <p>By induction, $\chi_3(L(3n,1))\leq \chi_3(L(3,1)) + 1-n = 2-n$.</p>
+            <p>Implies that
+              \[\begin{aligned}
+                \chi_3(L(3n,1))+1 &= \chi(X)+1 \\
+                &= \chi(Y) \\
+                &\leq \chi_3(L(3(n-1),1)).
+              \end{aligned}\]
+            </p>
+            <p>By induction,
+              \[\begin{aligned}
+                \chi_3(L(3n,1)) &\leq \chi_3(L(3,1))+1-n \\
+                &= 2-n.
+              \end{aligned}\]
+            </p>
           </div>
 
           <div class="figure">
@@ -1080,7 +1091,12 @@
           <div class="text">
             <p>$X$ has the same Euler characteristic as its complement.</p>
             <p>The complement of $X$ deformation retracts onto the subcomplex spanned by the <i>even</i> edges.</p>
-            <p>Hence $\chi(X) = 1 - \mathfrak{e} + \frac{B+4C}{2} - C$</p>
+            <p>Hence
+              \[\begin{aligned}
+                \chi(X) &= 1-\mathfrak{e} \\
+                &\quad +\frac{B+4C}{2}-C.
+              \end{aligned}\]
+            </p>
             <p>In particular $\chi(X)\geq 1-\mathfrak{e}$</p>
           </div>
 
@@ -1115,9 +1131,20 @@
       </section>
 
       <section class="slide">
-        <p>$\chi(L(3n,1))=0 = 1-\mathfrak{e}-\mathfrak{o} + \frac{4c(L(3n,1))}{2} - c(L(3n,1))$</p>
+        <p>
+          \[\begin{aligned}
+            \chi(L(3n,1)) &= 0 \\
+            &= 1-\mathfrak{e}-\mathfrak{o} \\
+            &\quad +\frac{4c(L(3n,1))}{2}-c(L(3n,1)).
+          \end{aligned}\]
+        </p>
         <p>Hence, $c(L(3n,1)) = \mathfrak{e}+\mathfrak{o} - 1$</p>
-        <p>Hence, $c(L(3n,1)) \geq n-1 +2 - 1 = n$</p>
+        <p>Hence,
+          \[\begin{aligned}
+            c(L(3n,1)) &\geq n-1+2-1 \\
+            &= n.
+          \end{aligned}\]
+        </p>
       </section>
 
       <section class="slide">
