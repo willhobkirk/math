@@ -418,6 +418,22 @@
           display: none;
         }
       }
+      /* Red boxes reserve their space but only show their borders on reveal. */
+      .slide .red-box {
+        border: 2px solid red;
+        padding: 12px;
+        border-radius: 6px;
+      }
+      .slide .red-box.tight-box {
+        width: fit-content;
+        max-width: 100%;
+      }
+      @media screen {
+        .slide .red-box.paragraph-pending {
+          border-color: transparent;
+        }
+      }
+
       /* Keep upcoming text grey and highlight the latest revealed block. */
       @media screen {
         .slide .paragraph-pending,
@@ -492,7 +508,7 @@
           <p>If $M$ is closed, orientable and irreducible and $M\not\in \{S^3, \mathbb{R}\mathrm{P}^3,L(3,1)\}$ then any minimal triangulation of $M$ must have a single vertex.</p>
         </div>
         <h3>Standing assumption:</h3>
-        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">$\mathcal{T}$ has a single vertex.</p>
+        <p class="red-box">$\mathcal{T}$ has a single vertex.</p>
 
       </section>
 
@@ -643,7 +659,7 @@
       <section class="slide centered-slide">
         <p>Fact: $H_2(L(3n,1);\mathbb{Z}_3) = \mathbb{Z}_3$</p>
         <h2>Abuse of notation:</h2>
-        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">
+        <p class="red-box">
           $\chi_3(L(3n,1)):= \chi_3(x)$ where $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$.</p>
       </section>
 
@@ -670,7 +686,7 @@
 
       <section class="slide centered-slide">
         <h2>Standing assumption:</h2>
-        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">Let $X$ be a non-separating $\mathbb{Z}_3$-folded surface embedded in $L(3n,1)$ of maximal Euler characteristic for some $n\in \mathbb{Z}^{>0}$.</p>
+        <p class="red-box">Let $X$ be a non-separating $\mathbb{Z}_3$-folded surface embedded in $L(3n,1)$ of maximal Euler characteristic for some $n\in \mathbb{Z}^{>0}$.</p>
 
       </section>
 
@@ -1078,6 +1094,7 @@
 
       <section class="slide centered-slide">
         <p>What does this have to do with triangulation complexity?</p>
+        <h3>Let's prove that $c(L(3n,1))\geq n$.</h3>
       </section>
 
       <section class="slide figure-slide">
@@ -1115,10 +1132,10 @@
 
       <section class="slide">
         <p>$X$ is non-separating so</p>
-        <p>\[\chi(X) \leq \chi_3(L(3n,1))= 2-n\].</p>
+        <p>\[\chi(X) \leq \chi_3(L(3n,1))= 2-n\]</p>
         <p>Hence</p>
-        <p>\[1-\mathfrak{e} \leq \chi(X) \leq 2-n\].</p>
-        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">\[\Rightarrow \mathfrak{e} \geq n-1\].</p>
+        <p>\[1-\mathfrak{e} \leq \chi(X) \leq 2-n\]</p>
+        <p class="red-box tight-box">$\displaystyle \Rightarrow \mathfrak{e} \geq n-1$</p>
       </section>
 
       <section class="slide figure-slide">
@@ -1127,7 +1144,7 @@
             <p>$\mathfrak{o}&gt; 0$ since $X$ is non-empty.</p>
             <p>$\mathfrak{o}= 1$ implies that a $\mathbb{Z}_3$-crosscap embeds in $L(3n,1)$.</p>
             <p>This is impossible since $\chi_3(L(3n,1))\leq 2-n \leq 0$.</p>
-            <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">$\mathfrak{o} \geq 2$</p>
+            <p class="red-box tight-box">$\mathfrak{o} \geq 2$</p>
           </div>
 
           <div class="figure">
