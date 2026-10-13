@@ -634,9 +634,17 @@
         <p>Properties:</p>
         <ol>
           <li>$\chi_3$ is well-defined.</li>
+          <li>$\chi_3(x) = \chi_3(-x)$</li>
           <li>$\chi_3(x)\leq 1$ for all lens spaces other than $S^2\times S^1$</li>
           <li>If $M$ is a closed orientable $3$-manifold with $\beta_2(M;\mathbb{Z}_3)=1$ then $||x||_{\mathbb{Z}_3} = \max(0,-\chi_3(x))$</li>
         </ol>
+      </section>
+
+      <section class="slide centered-slide">
+        <p>Fact: $H_2(L(3n,1);\mathbb{Z}_3) = \mathbb{Z}_3$</p>
+        <h2>Abuse of notation:</h2>
+        <p style="border: 2px solid red; padding: 12px; border-radius: 6px;">
+          $\chi_3(L(3n,1)):= \chi_3(x)$ where $x \in H_2(L(3n,1);\mathbb{Z}_3) \setminus \{0\}$.</p>
       </section>
 
       <section class="slide two-figures">
@@ -1075,9 +1083,13 @@
       <section class="slide figure-slide">
         <div class="slide-body">
           <div class="text">
-            <p>Let $\mathcal{T}$ be a minimal one-vertex triangulation of $L(3n,1)$</p>
+            <p>Let $\mathcal{T}$ be a minimal one-vertex triangulation of $L(3n,1)$ where $n\geq 2$.</p>
             <p>Let $X$ be a canonical $\mathbb{Z}_3$-folded surface.</p>
-            <p>Partition the edges of $\mathcal{T}$ into $\mathfrak{e}$ <i>even</i> edges and $\mathfrak{o}$ <i>odd</i> edges.</p>
+            <p>Partition the edges of $\mathcal{T}$ into </p>
+            <ul>
+              <li>$\mathfrak{e}$ <i>even</i> edges</li>
+              <li>$\mathfrak{o}$ <i>odd</i> edges</li>
+            </ul>
           </div>
 
           <div class="figure">
@@ -1091,12 +1103,7 @@
           <div class="text">
             <p>$X$ has the same Euler characteristic as its complement.</p>
             <p>The complement of $X$ deformation retracts onto the subcomplex spanned by the <i>even</i> edges.</p>
-            <p>Hence
-              \[\begin{aligned}
-                \chi(X) &= 1-\mathfrak{e} \\
-                &\quad +\frac{B+4C}{2}-C.
-              \end{aligned}\]
-            </p>
+            <p>Hence $\chi(X) = 1-\mathfrak{e} +\frac{B+4C}{2}-C$</p>
             <p>In particular $\chi(X)\geq 1-\mathfrak{e}$</p>
           </div>
 
@@ -1107,9 +1114,8 @@
       </section>
 
       <section class="slide">
-        <p>$X$ is non-separating since the triangulation has one vertex.</p>
-        <p>So $\chi(X) \leq \chi_3(L(3n,1))= 2-n$.</p>
-        <p>Hence $1-\mathfrak{e} \leq 2-n$</p>
+        <p>$X$ is non-separating so $\chi(X) \leq \chi_3(L(3n,1))= 2-n$.</p>
+        <p>Hence $1-\mathfrak{e} \leq \chi(X) \leq 2-n$</p>
         <p>$\Rightarrow \mathfrak{e} \geq n-1$.</p>
       </section>
 
@@ -1121,7 +1127,7 @@
           <div class="text">
             <p>$\mathfrak{o}&gt; 0$ since $X$ is non-empty.</p>
             <p>$\mathfrak{o}= 1$ implies that a $\mathbb{Z}_3$-crosscap embeds in $L(3n,1)$.</p>
-            <p>But $\chi_3(L(3n,1)) = 2-n &lt; 1$ (contradiction).</p>
+            <p>This is impossible since $\chi_3(L(3n,1))\leq 2-n \leq 0$.</p>
           </div>
 
           <div class="figure">
@@ -1131,20 +1137,12 @@
       </section>
 
       <section class="slide">
-        <p>
-          \[\begin{aligned}
-            \chi(L(3n,1)) &= 0 \\
-            &= 1-\mathfrak{e}-\mathfrak{o} \\
-            &\quad +\frac{4c(L(3n,1))}{2}-c(L(3n,1)).
-          \end{aligned}\]
-        </p>
-        <p>Hence, $c(L(3n,1)) = \mathfrak{e}+\mathfrak{o} - 1$</p>
-        <p>Hence,
-          \[\begin{aligned}
-            c(L(3n,1)) &\geq n-1+2-1 \\
-            &= n.
-          \end{aligned}\]
-        </p>
+        <p>$L(3n,1)$ is closed so $\chi(L(3n,1)) = 0$</p>
+        <p>Counting cells of $\mathcal{T}$ we have:</p>
+        <p>\[1-\mathfrak{e}-\mathfrak{o}+\frac{4c(L(3n,1))}{2}-c(L(3n,1)) = 0\]</p>
+        <p>$\Rightarrow c(L(3n,1)) = \mathfrak{e}+\mathfrak{o} - 1$ \geq (n-1) + (2) - 1 = n$</p>
+        <p>$\qquad \geq (n-1) + (2) - 1 </p>
+        <p>$\qquad \geq n$</p>
       </section>
 
       <section class="slide">
