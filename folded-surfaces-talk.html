@@ -437,15 +437,45 @@
         }
       }
 
-      /* Keep upcoming text grey and highlight the latest revealed block. */
-      @media screen {
-        .slide .paragraph-pending,
-        .slide .paragraph-pending * {
-          color: #ccc !important;
+      /* Plain text throughout this print-friendly copy. */
+      .slide, .slide * {
+        color: #000 !important;
+      }
+      .slide .red-box {
+        border: none;
+        border-radius: 0;
+      }
+      .slide.has-pending-paragraphs::after {
+        display: none;
+      }
+      @media print {
+        html, body {
+          width: auto;
+          height: auto;
+          overflow: visible;
         }
-        .slide .paragraph-current,
-        .slide .paragraph-current * {
-          color: #8b0000 !important;
+        #deck {
+          position: static;
+          inset: auto;
+          width: 320mm;
+          height: auto;
+          transform: none;
+        }
+        .slide, .slide.active {
+          position: relative;
+          inset: auto;
+          width: 320mm;
+          height: 180mm;
+          overflow: hidden;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .slide.centered-slide {
+          display: flex;
+        }
+        .paragraph-pending, .paragraph-current {
+          visibility: visible !important;
+          opacity: 1 !important;
         }
       }
     </style>
@@ -1288,7 +1318,7 @@
           );
         }
         function resetParagraphs(slideIndex) {
-          const revealAll = slides[slideIndex].classList.contains('title-slide');
+          const revealAll = true;
           paragraphSteps[slideIndex].forEach((paragraph) => {
             paragraph.classList.toggle('paragraph-pending', !revealAll);
             paragraph.classList.remove('paragraph-current');
@@ -1401,6 +1431,11 @@
           }
           event.preventDefault();
         });
+        // Print layout must fit every slide, including slides never visited.
+        window.addEventListener('beforeprint', () => {
+          slides.forEach(fitSlide);
+        });
+        window.addEventListener('afterprint', scheduleFit);
         window.addEventListener('resize', resize);
         window.addEventListener('hashchange', () => show(fromHash()));
         resize();
