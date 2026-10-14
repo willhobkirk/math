@@ -462,6 +462,8 @@
           transform: none;
         }
         .slide, .slide.active {
+          --text-scale: 1 !important;
+          font-size: var(--body-size) !important;
           position: relative;
           inset: auto;
           width: 320mm;
@@ -1431,9 +1433,11 @@
           }
           event.preventDefault();
         });
-        // Print layout must fit every slide, including slides never visited.
+        // Hidden screen slides have no measurable layout before print.
+        // Reset their scale rather than fitting zero-sized elements.
         window.addEventListener('beforeprint', () => {
-          slides.forEach(fitSlide);
+          cancelAnimationFrame(fitFrame);
+          slides.forEach((slide) => slide.style.setProperty('--text-scale', 1));
         });
         window.addEventListener('afterprint', scheduleFit);
         window.addEventListener('resize', resize);
